@@ -1,0 +1,34 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.mrgulshanyadav/misarblog-mcp",
+  "displayName": "Misar.Blog MCP Server",
+  "description": "Publish blog posts, manage drafts, schedule articles, generate AI cover images, and pull analytics from your Misar.Blog account. 15 tools covering the full editorial workflow: write → draft → publish → series → analytics.",
+  "homepage": "https://www.misar.blog",
+  "license": "MIT",
+  "categories": ["content", "writing", "publishing"],
+  "keywords": ["blogging", "content-publishing", "ai-writing", "markdown", "analytics", "seo", "editorial"],
+  "packages": [
+    {
+      "registry": "npm",
+      "name": "@misarblog/mcp",
+      "version": "1.0.4",
+      "runtimeHint": "node",
+      "installationCommand": "npx -y @misarblog/mcp"
+    }
+  ],
+  "remotes": [],
+  "connections": [
+    {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@misarblog/mcp@latest"],
+      "env": {
+        "MISARBLOG_API_KEY": {
+          "description": "Your Misar.Blog API key (starts with mbk_). Get it from https://www.misar.blog/dashboard/api",
+          "required": false,
+          "secret": true
+        }
+      }
+    }
+  ]
+}
