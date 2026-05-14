@@ -1,0 +1,73 @@
+name: Misar.Blog MCP Server
+description: "Publish blog posts, manage drafts, schedule articles, generate AI cover images, and pull analytics — all from Claude Code, Cursor, or Windsurf. Connect your Misar.Blog creator account via API key or one-click browser login. 15 tools covering the full editorial workflow: write → draft → publish → series → analytics."
+homepage: https://www.misar.blog
+license: MIT
+category: Content & Writing
+tags:
+  - blogging
+  - content-publishing
+  - ai-writing
+  - markdown
+  - analytics
+  - seo
+  - editorial
+  - mcp-server
+  - claude-code
+  - cursor
+  - windsurf
+  - misar
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        description: "Your Misar.Blog API key (starts with mbk_). Get it from https://www.misar.blog/dashboard/api"
+        secret: true
+      baseUrl:
+        type: string
+        description: "Override the Misar.Blog API base URL (optional, leave blank for default)"
+        default: ""
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["-y", "@misarblog/mcp@latest"],
+      env: {
+        ...(config.apiKey ? { MISARBLOG_API_KEY: config.apiKey } : {}),
+        ...(config.baseUrl ? { MISARBLOG_BASE_URL: config.baseUrl } : {})
+      }
+    })
+
+tools:
+  - name: publish_article
+    description: Publish a new article or update an existing draft to published
+  - name: create_draft
+    description: Create a new draft article with title, content, tags, and series
+  - name: get_article
+    description: Fetch a single article by slug or ID
+  - name: list_my_articles
+    description: List your articles with optional status/tag/series filters
+  - name: upload_image
+    description: Upload an image to your article media library
+  - name: generate_cover_image
+    description: Generate an AI cover image for an article using a prompt
+  - name: get_series
+    description: Fetch a series by slug, including all articles in order
+  - name: create_series
+    description: Create a new article series
+  - name: add_to_series
+    description: Add an article to a series at a specific position
+  - name: get_analytics_summary
+    description: Get traffic, views, and engagement analytics for your articles
+  - name: get_profile
+    description: Fetch your Misar.Blog creator profile
+  - name: login
+    description: Authenticate via browser (opens OAuth flow, no API key needed)
+  - name: get_reactions
+    description: Get reaction counts for an article
+  - name: add_reaction
+    description: "Add a reaction (like/clap/bookmark) to an article"
+  - name: remove_reaction
+    description: Remove a reaction from an article

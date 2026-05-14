@@ -1,0 +1,29 @@
+{
+  "name": "@misarblog/mcp",
+  "version": "1.0.4",
+  "description": "Publish & Manage Blog Posts from Claude Code — Misar.Blog MCP Server",
+  "license": "MIT",
+  "homepage": "https://www.misar.blog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrgulshanyadav/misarblog-mcp"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "blogging",
+    "content-publishing",
+    "ai-writing",
+    "markdown",
+    "analytics",
+    "seo",
+    "editorial",
+    "claude-code",
+    "cursor",
+    "windsurf",
+    "misar"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
