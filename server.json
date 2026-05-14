@@ -3,7 +3,7 @@
   "name": "io.github.mrgulshanyadav/misarblog-mcp",
   "title": "Misar.Blog MCP Server",
   "description": "Publish and manage blog posts, articles, and series on Misar.Blog from your AI agent.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "repository": {
     "url": "https://github.com/mrgulshanyadav/misarblog-mcp",
     "source": "github"
@@ -20,7 +20,7 @@
       "environmentVariables": [
         {
           "name": "MISARBLOG_API_KEY",
-          "description": "Misar.Blog API key — get from https://www.misar.blog/settings/api",
+          "description": "Misar.Blog API key \u2014 get from https://www.misar.blog/settings/api",
           "isRequired": true,
           "isSecret": true
         }
@@ -34,7 +34,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Misar.Blog API key — get from https://www.misar.blog/settings/api. Format: Bearer <apiKey>",
+          "description": "Misar.Blog API key \u2014 get from https://www.misar.blog/settings/api. Format: Bearer <apiKey>",
           "isRequired": true,
           "isSecret": true
         }
