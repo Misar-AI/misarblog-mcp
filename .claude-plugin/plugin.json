@@ -1,0 +1,7 @@
+{
+  "name": "Misar.Blog",
+  "description": "Publish and manage blog posts, articles, and series on Misar.Blog directly from your AI agent. 20 tools: create/publish articles, manage series, query analytics, handle comments, reactions, newsletter, and AI-assisted content generation.",
+  "homepage": "https://www.misar.blog",
+  "mcpServers": [".mcp.json"],
+  "skills": ["skills"]
+}
