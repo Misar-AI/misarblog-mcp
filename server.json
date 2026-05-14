@@ -1,34 +1,44 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.mrgulshanyadav/misarblog-mcp",
-  "displayName": "Misar.Blog MCP Server",
-  "description": "Publish blog posts, manage drafts, schedule articles, generate AI cover images, and pull analytics from your Misar.Blog account. 15 tools covering the full editorial workflow: write → draft → publish → series → analytics.",
-  "homepage": "https://www.misar.blog",
-  "license": "MIT",
-  "categories": ["content", "writing", "publishing"],
-  "keywords": ["blogging", "content-publishing", "ai-writing", "markdown", "analytics", "seo", "editorial"],
+  "title": "Misar.Blog MCP Server",
+  "description": "Publish and manage blog posts, articles, and series on Misar.Blog directly from your AI agent. 20 tools: create/publish articles, manage series, query analytics, handle comments, reactions, newsletter, and AI-assisted content generation.",
+  "version": "1.0.4",
+  "repository": {
+    "url": "https://github.com/mrgulshanyadav/misarblog-mcp",
+    "source": "github"
+  },
   "packages": [
     {
-      "registry": "npm",
-      "name": "@misarblog/mcp",
+      "registryType": "npm",
+      "identifier": "@misarblog/mcp",
       "version": "1.0.4",
-      "runtimeHint": "node",
-      "installationCommand": "npx -y @misarblog/mcp"
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "MISARBLOG_API_KEY",
+          "description": "Misar.Blog API key — get from https://www.misar.blog/settings/api",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
     }
   ],
-  "remotes": [],
-  "connections": [
+  "remotes": [
     {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@misarblog/mcp@latest"],
-      "env": {
-        "MISARBLOG_API_KEY": {
-          "description": "Your Misar.Blog API key (starts with mbk_). Get it from https://www.misar.blog/dashboard/api",
-          "required": false,
-          "secret": true
+      "type": "streamable-http",
+      "url": "https://www.misar.blog/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Misar.Blog API key — get from https://www.misar.blog/settings/api. Format: Bearer <apiKey>",
+          "isRequired": true,
+          "isSecret": true
         }
-      }
+      ]
     }
   ]
 }
