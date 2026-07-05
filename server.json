@@ -12,7 +12,7 @@
     {
       "registryType": "npm",
       "identifier": "@misarblog/mcp",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "runtimeHint": "npx",
       "transport": {
         "type": "stdio"
