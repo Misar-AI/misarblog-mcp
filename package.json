@@ -1,7 +1,7 @@
 {
   "name": "@misarblog/mcp",
-  "version": "1.0.4",
-  "description": "Publish & Manage Blog Posts from Claude Code — Misar.Blog MCP Server",
+  "version": "1.0.5",
+  "description": "Publish & Manage Blog Posts from Claude Code \u2014 Misar.Blog MCP Server",
   "license": "MIT",
   "homepage": "https://www.misar.blog",
   "repository": {
