@@ -1,5 +1,12 @@
+# Smithery.ai configuration for @misarblog/mcp
+# Listed on Smithery as: misar/misarblog-mcp
+# https://smithery.ai/server/misar/misarblog-mcp
 name: Misar.Blog MCP Server
-description: "Publish blog posts, manage drafts, schedule articles, generate AI cover images, and pull analytics — all from Claude Code, Cursor, or Windsurf. Connect your Misar.Blog creator account via API key or one-click browser login. 15 tools covering the full editorial workflow: write → draft → publish → series → analytics."
+description: >
+  Publish and manage blog posts, articles, and series on Misar.Blog directly from
+  Claude Code, Cursor, or Windsurf. Connect your creator account via API key or the
+  one-click browser login tool. 20 remote tools covering the full editorial workflow:
+  research → draft → publish → series → analytics → comments, reactions & newsletter.
 homepage: https://www.misar.blog
 license: MIT
 category: Content & Writing
@@ -24,50 +31,70 @@ startCommand:
     properties:
       apiKey:
         type: string
-        description: "Your Misar.Blog API key (starts with mbk_). Get it from https://www.misar.blog/dashboard/api"
-        secret: true
+        title: API Key
+        description: >
+          Your Misar.Blog API key (starts with mbk_). Generate one at
+          https://www.misar.blog/dashboard/settings/api-keys — or leave blank and
+          run the "login" tool to authenticate via browser.
+        x-secret: true
       baseUrl:
         type: string
-        description: "Override the Misar.Blog API base URL (optional, leave blank for default)"
+        title: Base URL
+        description: >
+          Only needed for self-hosted Misar.Blog instances.
+          Leave blank to use https://www.misar.blog.
         default: ""
+    required: []
   commandFunction: |-
     (config) => ({
       command: "npx",
       args: ["-y", "@misarblog/mcp@latest"],
       env: {
         ...(config.apiKey ? { MISARBLOG_API_KEY: config.apiKey } : {}),
-        ...(config.baseUrl ? { MISARBLOG_BASE_URL: config.baseUrl } : {})
-      }
+        ...(config.baseUrl ? { MISARBLOG_BASE_URL: config.baseUrl } : {}),
+      },
     })
 
+# Remote HTTP surface (20 tools). login/status/upload_image are stdio/local-only
+# and are not exposed over Smithery's hosted HTTP gateway.
 tools:
+  - name: get_profile
+    description: Fetch your Misar.Blog creator profile
+  - name: get_analytics_summary
+    description: Get traffic, views, revenue, and subscriber analytics for a time period
+  - name: list_my_articles
+    description: List your articles with optional status/tag/series filters
+  - name: get_article
+    description: Fetch a single article by slug or ID
   - name: publish_article
     description: Publish a new article or update an existing draft to published
   - name: create_draft
     description: Create a new draft article with title, content, tags, and series
-  - name: get_article
-    description: Fetch a single article by slug or ID
-  - name: list_my_articles
-    description: List your articles with optional status/tag/series filters
-  - name: upload_image
-    description: Upload an image to your article media library
-  - name: generate_cover_image
-    description: Generate an AI cover image for an article using a prompt
   - name: get_series
     description: Fetch a series by slug, including all articles in order
   - name: create_series
     description: Create a new article series
   - name: add_to_series
     description: Add an article to a series at a specific position
-  - name: get_analytics_summary
-    description: Get traffic, views, and engagement analytics for your articles
-  - name: get_profile
-    description: Fetch your Misar.Blog creator profile
-  - name: login
-    description: Authenticate via browser (opens OAuth flow, no API key needed)
+  - name: research_topic
+    description: Research a topic to gather angles, sources, and talking points before writing
+  - name: generate_title_seo
+    description: Generate an SEO-optimized title for an article draft or topic
+  - name: suggest_titles
+    description: Suggest several candidate titles for an article
+  - name: generate_cover_image
+    description: Generate an AI cover image for an article from a prompt
+  - name: list_comments
+    description: List comments on an article
+  - name: get_follow_status
+    description: Check whether you follow (or are followed by) another creator
   - name: get_reactions
     description: Get reaction counts for an article
   - name: add_reaction
-    description: "Add a reaction (like/clap/bookmark) to an article"
+    description: Add a reaction (like/clap/bookmark) to an article
   - name: remove_reaction
     description: Remove a reaction from an article
+  - name: list_newsletter_subscribers
+    description: List your newsletter subscribers
+  - name: list_newsletter_issues
+    description: List your sent and draft newsletter issues
