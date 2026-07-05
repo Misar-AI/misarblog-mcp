@@ -20,8 +20,9 @@
       "environmentVariables": [
         {
           "name": "MISARBLOG_API_KEY",
-          "description": "Misar.Blog API key \u2014 get from https://www.misar.blog/settings/api",
-          "isRequired": true,
+          "description": "Your Misar.Blog API key (starts with mbk_). Generate one at https://www.misar.blog/dashboard/settings/api-keys — or omit it and run the \"login\" tool to authenticate via browser.",
+          "isRequired": false,
+          "format": "string",
           "isSecret": true
         }
       ]
@@ -34,7 +35,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Misar.Blog API key \u2014 get from https://www.misar.blog/settings/api. Format: Bearer <apiKey>",
+          "description": "Misar.Blog API key. Format: Bearer <mbk_...>. Generate one at https://www.misar.blog/dashboard/settings/api-keys",
           "isRequired": true,
           "isSecret": true
         }
