@@ -1,29 +1,87 @@
 {
   "name": "@misarblog/mcp",
-  "version": "1.0.5",
-  "description": "Publish & Manage Blog Posts from Claude Code \u2014 Misar.Blog MCP Server",
-  "license": "MIT",
-  "homepage": "https://www.misar.blog",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mrgulshanyadav/misarblog-mcp"
+  "version": "2.0.0",
+  "mcpName": "io.github.mrgulshanyadav/misarblog-mcp",
+  "description": "Misar.Blog MCP server \u2014 publish and manage articles, series, comments, reactions, newsletters, AI writing tools, cover-image generation, and analytics from Claude, Cursor, VS Code, Windsurf, and any MCP client.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "misarblog-mcp": "dist/index.js"
+  },
+  "files": [
+    "README.md",
+    "connectors",
+    "dist",
+    "prompts",
+    "server.json",
+    "skills",
+    "smithery.yaml"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x dist/index.js",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "keywords": [
     "mcp",
     "mcp-server",
+    "model-context-protocol",
     "blogging",
+    "blog",
     "content-publishing",
-    "ai-writing",
     "markdown",
+    "ai-writing",
+    "ai-content",
+    "draft-management",
     "analytics",
-    "seo",
-    "editorial",
     "claude-code",
     "cursor",
     "windsurf",
-    "misar"
+    "misarblog",
+    "publishing-platform",
+    "seo",
+    "aeo",
+    "writer-tools",
+    "editorial"
   ],
-  "engines": {
-    "node": ">=18"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrgulshanyadav/misarblog-mcp.git"
+  },
+  "homepage": "https://www.misar.blog",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./http": {
+      "types": "./dist/http.d.ts",
+      "import": "./dist/http.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/mrgulshanyadav/misarblog-mcp/issues"
   }
 }

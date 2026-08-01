@@ -1,0 +1,7 @@
+{
+  "qualifiedName": "misar/misarblog-mcp",
+  "install": "npx -y @smithery/cli install misar/misarblog-mcp --client claude",
+  "config": {
+    "apiKey": "mbk_YOUR_KEY_HERE"
+  }
+}

@@ -1,7 +1,33 @@
 {
-  "name": "Misar.Blog",
-  "description": "Publish and manage blog posts, articles, and series on Misar.Blog directly from your AI agent. 20 tools: create/publish articles, manage series, query analytics, handle comments, reactions, newsletter, and AI-assisted content generation.",
+  "name": "misarblog",
+  "version": "2.0.0",
+  "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.",
+  "author": {
+    "name": "Misar AI",
+    "email": "support@misar.io",
+    "url": "https://misar.io"
+  },
   "homepage": "https://www.misar.blog",
-  "mcpServers": [".mcp.json"],
-  "skills": ["skills"]
+  "repository": "https://github.com/mrgulshanyadav/misarblog-mcp",
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "content",
+    "publishing",
+    "blogging",
+    "seo",
+    "analytics"
+  ],
+  "mcpServers": {
+    "misarblog": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@misarblog/mcp@latest"
+      ],
+      "env": {
+        "MISARBLOG_API_KEY": "${MISARBLOG_API_KEY}"
+      }
+    }
+  }
 }

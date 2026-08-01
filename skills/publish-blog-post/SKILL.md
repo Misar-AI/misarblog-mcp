@@ -1,60 +1,50 @@
 ---
 name: publish-blog-post
-summary: Research a topic and publish a complete SEO-optimized blog post on Misar.Blog in one automated workflow.
-description: Research a topic and publish a complete, SEO-optimised blog post on Misar.Blog. The skill researches the topic, generates title options, creates a cover image, and publishes the final article in a single automated workflow. Requires a Misar.Blog API key (mbk_ prefix).
-tags:
-  - blogging
-  - content-creation
-  - publishing
-  - seo
-  - ai-writing
-license: MIT
-metadata:
-  author: Misar.Blog
-  homepage: https://www.misar.blog
-  mcp_server: https://misarblog-mcp--misar.run.tools
+description: Write, draft, and publish an article on Misar.Blog. Use when the user wants to write a post, publish an article, save a draft, or turn notes into a blog post.
 ---
 
-# Publish Blog Post
+# Publish a blog post
 
-Use this skill when the user wants to research a topic and publish a complete, SEO-optimised blog post on Misar.Blog in a single automated workflow.
+## 1. Ground the piece before writing
 
-## Triggers
+- `list_my_articles` — match the author's existing voice, and avoid re-covering
+  a topic they have already published.
+- `search_articles` — check what already exists platform-wide on the subject,
+  so the piece has an angle rather than duplicating someone else's.
+- `research_topic` — gather angles and sources.
 
-- "Write a blog post about [topic]"
-- "Publish an article on [topic] to my blog"
-- "Research and publish [topic] on Misar.Blog"
-- "Create SEO content about [topic] and post it"
+Writing before doing this produces generic output that reads like every other
+post on the topic.
 
-## Authentication
+## 2. Draft
 
-Requires a Misar.Blog API key with `mbk_` prefix.
-Get yours at: https://www.misar.blog/settings/api
+`create_draft` with `title`, `body_markdown`, and `tags`.
 
-## Workflow Steps
+- Markdown with `##` headings and short paragraphs.
+- Open with a direct answer to the question the title poses — this is what
+  makes a piece quotable by AI answer engines and eligible for featured
+  snippets.
+- 3–8 tags. More dilutes rather than broadens reach.
 
-1. **research_topic** — Gather facts, angles, and SEO context for the topic
-2. **suggest_titles** — Generate 5 optimised title options
-3. **generate_cover_image** — Create an AI-generated cover image
-4. **publish_article** — Publish the fully drafted article with selected title and cover
+**Show the draft and wait for approval before saving.** Never publish in the
+same step as writing.
 
-## Inputs
+## 3. Title and cover
 
-| Parameter | Type | Required | Default | Description |
-|---|---|---|---|---|
-| `topic` | string | yes | — | Main topic or keyword to write about |
-| `target_audience` | string | yes | general readers | Who the article is written for |
-| `tone` | string | no | informative | informative / conversational / professional / humorous / authoritative |
+- `suggest_titles` / `generate_title_seo` for candidates. Keep under 60
+  characters so it is not truncated in search results.
+- `generate_cover_image` for a cover. Describe the subject concretely; abstract
+  prompts produce unusable stock-feeling images.
 
-## Outputs
+## 4. Publish
 
-- `article_url` — Published article URL on Misar.Blog
-- `article_id` — Unique article identifier
-- `title` — Final title selected for the article
-- `cover_image_url` — URL of the generated cover image
+`publish_article` makes it public — get explicit confirmation first. Pass
+`schedule_at` to schedule instead.
 
-## Example
+Use `update_article` for edits after the fact rather than creating a duplicate.
 
-User: Write a blog post about AI productivity tools for developers
-Skill: Researches topic → Generates 5 titles → Creates cover → Publishes article
-Output: https://www.misar.blog/@username/articles/ai-productivity-tools-for-developers-2025
+## Do not
+
+- Invent statistics, quotes, or sources. If `research_topic` did not surface
+  it, do not assert it.
+- Publish without the user seeing the final text.

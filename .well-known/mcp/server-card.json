@@ -1,0 +1,272 @@
+{
+  "serverInfo": {
+    "name": "Misar.Blog",
+    "version": "2.0.0",
+    "logoUrl": "https://www.misar.blog/logo-light.png"
+  },
+  "websiteUrl": "https://www.misar.blog",
+  "documentationUrl": "https://docs.misar.io/blog/mcp",
+  "authentication": {
+    "required": true,
+    "schemes": [
+      "bearer"
+    ],
+    "tokenUrl": "https://www.misar.blog/dashboard/settings/api-keys"
+  },
+  "capabilities": {
+    "tools": true,
+    "prompts": true,
+    "resources": true
+  },
+  "tools": [
+    {
+      "name": "upgrade",
+      "description": "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks. Call it any time — not only after hitting a limit. Set open=true to open the checkout page in your browser."
+    },
+    {
+      "name": "get_profile",
+      "description": "Get your Misar.Blog creator profile"
+    },
+    {
+      "name": "get_analytics_summary",
+      "description": "Get analytics summary (views, revenue, subscribers) for a time period"
+    },
+    {
+      "name": "list_my_articles",
+      "description": "List your articles on Misar.Blog"
+    },
+    {
+      "name": "get_article",
+      "description": "Get a single article by slug, including full markdown content"
+    },
+    {
+      "name": "publish_article",
+      "description": "Publish a new article (or schedule it) on Misar.Blog"
+    },
+    {
+      "name": "create_draft",
+      "description": "Save an article as a draft on Misar.Blog (for review before publishing)"
+    },
+    {
+      "name": "update_article",
+      "description": "Update the title, body, or tags of an existing article or draft. Only the fields you pass are changed; omitted fields keep their current values."
+    },
+    {
+      "name": "search_articles",
+      "description": "Search PUBLISHED articles across Misar.Blog by keyword, tag, or author — including other creators' work. Use list_my_articles for your own drafts and unpublished posts."
+    },
+    {
+      "name": "research_topic",
+      "description": "Research a topic and get AI-generated insights, sources, and a content outline. Useful before writing an article."
+    },
+    {
+      "name": "generate_title_seo",
+      "description": "Generate 5 SEO/AEO/GEO-optimized article titles from a topic or keyword prompt. Targets high-volume, low-competition long-tail keywords. Optimized for Google, AI answer engines (ChatGPT, Perplexity, Claude), Google AI Overviews, and AI search experiences. Each title includes a keyword strategy hint."
+    },
+    {
+      "name": "suggest_titles",
+      "description": "Generate 5 compelling, SEO-friendly article title options from your existing article content. Use generate_title_seo instead if you want to target specific keywords or have not written content yet."
+    },
+    {
+      "name": "generate_cover_image",
+      "description": "Generate a cover image using AI and upload it to the Misar.Blog CDN"
+    },
+    {
+      "name": "get_series",
+      "description": "List all your series on Misar.Blog"
+    },
+    {
+      "name": "create_series",
+      "description": "Create a new series to group related articles"
+    },
+    {
+      "name": "add_to_series",
+      "description": "Add an existing article to a series"
+    },
+    {
+      "name": "list_comments",
+      "description": "Get public comments for an article. Rate-limited by IP — no API key required."
+    },
+    {
+      "name": "get_follow_status",
+      "description": "Get public follow status and follower count for a user by their profile UUID. No API key required."
+    },
+    {
+      "name": "list_newsletter_subscribers",
+      "description": "Get your newsletter subscriber list. Requires API key authentication."
+    },
+    {
+      "name": "list_newsletter_issues",
+      "description": "Get your sent and scheduled newsletter issues. Requires API key authentication."
+    },
+    {
+      "name": "get_reactions",
+      "description": "Get reaction counts and your reactions for an article. Requires API key."
+    },
+    {
+      "name": "add_reaction",
+      "description": "Add a reaction to an article. No-ops if already reacted. Requires API key."
+    },
+    {
+      "name": "remove_reaction",
+      "description": "Remove a specific reaction from an article. Requires API key."
+    }
+  ],
+  "prompts": [
+    {
+      "name": "draft_article",
+      "description": "Write a complete, SEO-optimised article draft and save it to Misar.Blog.",
+      "arguments": [
+        {
+          "name": "topic",
+          "description": "Topic, title idea, or detailed outline",
+          "required": true
+        },
+        {
+          "name": "tone",
+          "description": "professional | conversational | technical | beginner-friendly",
+          "required": false
+        },
+        {
+          "name": "word_count",
+          "description": "Target word count (default 800)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "improve_seo",
+      "description": "Audit an article for SEO/AEO/GEO and apply the improvements.",
+      "arguments": [
+        {
+          "name": "article_slug",
+          "description": "Slug of the article to analyse",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "write_newsletter",
+      "description": "Draft a newsletter issue from recent published articles.",
+      "arguments": [
+        {
+          "name": "issue_title",
+          "description": "Newsletter subject line",
+          "required": true
+        },
+        {
+          "name": "num_articles",
+          "description": "How many articles to feature (default 3)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "article_ideas",
+      "description": "Generate article ideas grounded in what has and has not been covered.",
+      "arguments": [
+        {
+          "name": "theme",
+          "description": "Theme or niche to generate ideas within",
+          "required": false
+        },
+        {
+          "name": "count",
+          "description": "How many ideas (default 10)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "social_caption",
+      "description": "Write platform-specific promotional captions for an article.",
+      "arguments": [
+        {
+          "name": "article_slug",
+          "description": "Slug of the article to promote",
+          "required": true
+        },
+        {
+          "name": "platform",
+          "description": "twitter | linkedin | reddit | all (default all)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "optimize_headline",
+      "description": "Generate and rank stronger headline options for an article.",
+      "arguments": [
+        {
+          "name": "article_slug",
+          "description": "Slug of the article",
+          "required": false
+        },
+        {
+          "name": "topic",
+          "description": "Topic, if the article does not exist yet",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "series_plan",
+      "description": "Plan a multi-part article series and set it up on Misar.Blog.",
+      "arguments": [
+        {
+          "name": "topic",
+          "description": "Subject of the series",
+          "required": true
+        },
+        {
+          "name": "parts",
+          "description": "How many parts (default 5)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "engagement_report",
+      "description": "Summarise blog performance and recommend what to do next.",
+      "arguments": [
+        {
+          "name": "days",
+          "description": "Look-back window in days (default 30)",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "uri": "misarblog://profile",
+      "name": "Creator profile",
+      "description": "Your Misar.Blog profile — username, display name, bio, and payout status. Read this to get the author URL and handle right before writing anything public.",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "misarblog://articles/recent",
+      "name": "Recent published articles",
+      "description": "Your 20 most recent published articles. Useful as a style and coverage reference so a new draft neither repeats nor contradicts existing work.",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "misarblog://articles/drafts",
+      "name": "Open drafts",
+      "description": "Your unpublished drafts, so work in progress can be resumed rather than restarted.",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "misarblog://series",
+      "name": "Article series",
+      "description": "Your series and the articles in each, in order.",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "misarblog://analytics/summary",
+      "name": "Analytics summary",
+      "description": "Views, revenue, and subscriber counts for the last 30 days — the baseline for any performance question.",
+      "mimeType": "application/json"
+    }
+  ]
+}

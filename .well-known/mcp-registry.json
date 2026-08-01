@@ -1,0 +1,21 @@
+{
+  "name": "Misar.Blog",
+  "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.",
+  "version": "2.0.0",
+  "homepage": "https://www.misar.blog",
+  "contact": "support@misar.io",
+  "mcp": {
+    "url": "https://www.misar.blog/api/mcp",
+    "transport": "streamable-http",
+    "protocol_version": "2025-06-18",
+    "authentication": {
+      "type": "bearer",
+      "tokenUrl": "https://www.misar.blog/dashboard/settings/api-keys"
+    }
+  },
+  "capabilities": {
+    "tools": 23,
+    "prompts": 8,
+    "resources": 5
+  }
+}

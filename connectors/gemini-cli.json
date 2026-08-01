@@ -7,8 +7,10 @@
         "@misarblog/mcp@latest"
       ],
       "env": {
-        "MISARBLOG_API_KEY": "${MISARBLOG_API_KEY}"
-      }
+        "MISARBLOG_API_KEY": "mbk_YOUR_KEY_HERE"
+      },
+      "timeout": 30000,
+      "trust": false
     }
   }
 }

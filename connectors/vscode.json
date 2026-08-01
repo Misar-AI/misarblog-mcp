@@ -1,0 +1,23 @@
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "misarblog-key",
+      "description": "Misar.Blog API key (mbk_…) — create one at https://www.misar.blog/dashboard/settings/api-keys",
+      "password": true
+    }
+  ],
+  "servers": {
+    "misarblog": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@misarblog/mcp@latest"
+      ],
+      "env": {
+        "MISARBLOG_API_KEY": "${input:misarblog-key}"
+      }
+    }
+  }
+}

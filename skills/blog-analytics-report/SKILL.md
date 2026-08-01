@@ -1,52 +1,38 @@
 ---
 name: blog-analytics-report
-summary: Generate a comprehensive analytics report for your Misar.Blog content for any time period (7d/30d/90d).
-description: Generate a comprehensive analytics report for your Misar.Blog content. Fetches analytics summary, profile stats, and formats actionable insights for any time window — 7d, 30d, or 90d. Requires a Misar.Blog API key (mbk_ prefix).
-tags:
-  - analytics
-  - reporting
-  - insights
-  - traffic
-  - content-performance
-license: MIT
-metadata:
-  author: Misar.Blog
-  homepage: https://www.misar.blog
-  mcp_server: https://misarblog-mcp--misar.run.tools
+description: Report on Misar.Blog performance — views, revenue, subscribers, engagement. Use for "how is my blog doing", traffic reports, or content performance analysis.
 ---
 
-# Blog Analytics Report
+# Blog performance report
 
-Use this skill when the user wants a comprehensive analytics report for their Misar.Blog content, including traffic, engagement, top articles, and performance insights.
+## Gather
 
-## Triggers
+- `get_analytics_summary` — views, revenue, subscribers over a window
+- `list_my_articles` (`status=published`) — what is live
+- `get_reactions` on top articles — engagement beyond raw views
+- `list_newsletter_subscribers` — audience growth
 
-- "Show me my blog analytics"
-- "How is my Misar.Blog performing?"
-- "Generate a blog report for the last 30 days"
-- "What are my top articles this month?"
-- "Analytics summary for my blog"
+## Interpret
 
-## Authentication
+Views alone say little. Useful framings:
 
-Requires a Misar.Blog API key with `mbk_` prefix.
-Get yours at: https://www.misar.blog/settings/api
+- **Views per article**, not just total — total rises simply by publishing more.
+- **Which topics** earn views, so the next piece is informed rather than guessed.
+- **Reactions relative to views** — a high-view, low-reaction piece usually
+  means the title over-promised.
+- **Subscriber growth against publishing cadence** — the honest test of whether
+  the writing converts readers.
 
-## Workflow Steps
+## Structure
 
-1. **get_analytics_summary** — Fetch views, reads, and engagement metrics
-2. **get_profile** — Fetch profile stats and follower data
-3. **format_analytics_insights** — Combine and format actionable insights
+Headline numbers; best and worst article each with a one-line reason; audience
+growth; then the single highest-impact action for next month.
 
-## Inputs
+Under 400 words. State plainly when a figure was unavailable — never estimate
+and present it as measured.
 
-| Parameter | Type | Required | Default | Description |
-|---|---|---|---|---|
-| `time_period` | string | yes | 30d | Time window: 7d, 30d, or 90d |
+## Next steps
 
-## Outputs
-
-- `report_summary` — Overall metrics object (views, reads, engagement rate)
-- `top_articles` — Array of best-performing articles
-- `profile_stats` — Profile-level statistics
-- `insights` — Array of actionable insight strings
+Ground recommendations in the data: if one topic outperforms, suggest a series
+(`manage-article-series`). If a strong piece underperforms on views, that is an
+SEO problem (`seo-optimize-article`), not a writing problem.
