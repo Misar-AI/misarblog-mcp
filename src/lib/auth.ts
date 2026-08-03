@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { homedir } from "os";
 import { join } from "path";
+import { authGuidance } from "./auth-guidance.js";
 
 const CONFIG_PATH = join(homedir(), ".misarblog", "config.json");
 
@@ -32,7 +33,10 @@ export function getApiKey(): string {
   if (cfg.api_key) return cfg.api_key;
 
   throw new Error(
-    "Not configured. Run the login tool to connect via browser, or set MISARBLOG_API_KEY."
+    // The full guidance block, not a one-liner: this text is relayed verbatim
+    // to the end user by their MCP client and is the only authentication UX
+    // they get. See src/lib/auth-guidance.ts (generated).
+    authGuidance("missing")
   );
 }
 

@@ -24,8 +24,22 @@ const WARN_THRESHOLD = 0.8;
 
 let pending: UsageWarning | null = null;
 
-/** Read the usage headers off a response; stash a warning if we're close. */
-export function noteUsage(headers: Headers): void {
+/**
+ * Read the usage headers off a response; stash a warning if we're close.
+ *
+ * Never throws. This runs on the hot path of EVERY API call, so a response
+ * without a standard `headers` object — a proxy, a test double, an older
+ * runtime — must degrade to "no warning", never break the call itself.
+ */
+export function noteUsage(headers: Headers | null | undefined): void {
+  // Reset FIRST. Every response clears the previous state, so a warning raised
+  // by an earlier metered write can never leak onto a later unrelated call —
+  // which would show the user a footer that has nothing to do with what they
+  // just did.
+  pending = null;
+
+  if (!headers || typeof headers.get !== "function") return;
+
   const feature = headers.get("x-misar-usage-feature");
   const usedRaw = headers.get("x-misar-usage-used");
   const limitRaw = headers.get("x-misar-usage-limit");

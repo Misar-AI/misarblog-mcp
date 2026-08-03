@@ -1,0 +1,7 @@
+# Misar.Blog MCP server for Codex.
+# Append to ~/.codex/config.toml
+
+[mcp_servers.misarblog]
+command = "npx"
+args = ["-y", "@misarblog/mcp@latest"]
+env = { MISARBLOG_API_KEY = "mbk_YOUR_KEY_HERE" }

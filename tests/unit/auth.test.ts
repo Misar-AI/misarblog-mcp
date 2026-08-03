@@ -35,7 +35,12 @@ describe("getApiKey()", () => {
 
   it("throws with helpful message when no env var and no config file", () => {
     mockReadFileSync.mockImplementation(() => { throw new Error("ENOENT"); });
-    expect(() => getApiKey()).toThrow("Not configured");
+    // The message is now the full guidance block (see auth-contract.test.ts):
+    // it must name the browser path, the dashboard URL and the env var, because
+    // an MCP client relays it verbatim to the end user.
+    expect(() => getApiKey()).toThrow(/Not authenticated with Misar\.Blog/);
+    expect(() => getApiKey()).toThrow(/dashboard\/settings\/api-keys/);
+    expect(() => getApiKey()).toThrow(/MISARBLOG_API_KEY/);
   });
 
   it("returns MISARBLOG_API_KEY env var when set", () => {
@@ -63,7 +68,12 @@ describe("getApiKey()", () => {
 
   it("throws when config file exists but api_key field is missing", () => {
     mockReadFileSync.mockReturnValue(JSON.stringify({ username: "nokey" }) as unknown as Buffer);
-    expect(() => getApiKey()).toThrow("Not configured");
+    // The message is now the full guidance block (see auth-contract.test.ts):
+    // it must name the browser path, the dashboard URL and the env var, because
+    // an MCP client relays it verbatim to the end user.
+    expect(() => getApiKey()).toThrow(/Not authenticated with Misar\.Blog/);
+    expect(() => getApiKey()).toThrow(/dashboard\/settings\/api-keys/);
+    expect(() => getApiKey()).toThrow(/MISARBLOG_API_KEY/);
   });
 });
 
@@ -173,7 +183,13 @@ describe("loadConfig() — malformed JSON", () => {
 
   it("returns empty object and does not throw when config is malformed JSON", () => {
     mockReadFileSync.mockReturnValue("{ this is not json" as unknown as Buffer);
-    // getApiKey() uses loadConfig() internally — if malformed JSON throws, getApiKey() should still throw "Not configured"
-    expect(() => getApiKey()).toThrow("Not configured");
+    // getApiKey() uses loadConfig() internally — malformed JSON must still fall
+    // through to the guidance error rather than surfacing a JSON parse failure.
+    // The message is now the full guidance block (see auth-contract.test.ts):
+    // it must name the browser path, the dashboard URL and the env var, because
+    // an MCP client relays it verbatim to the end user.
+    expect(() => getApiKey()).toThrow(/Not authenticated with Misar\.Blog/);
+    expect(() => getApiKey()).toThrow(/dashboard\/settings\/api-keys/);
+    expect(() => getApiKey()).toThrow(/MISARBLOG_API_KEY/);
   });
 });

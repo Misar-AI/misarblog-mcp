@@ -10,7 +10,7 @@
   ],
   "actions": [
     {
-      "openapi_url": "https://www.misar.blog/.well-known/openapi.yaml",
+      "openapi_url": "https://github.com/mrgulshanyadav/misarblog-mcp/raw/main/customgpt/openapi.json",
       "auth": {
         "type": "bearer"
       }

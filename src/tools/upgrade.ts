@@ -17,8 +17,16 @@ interface UsageRow {
 
 interface PlanResponse {
   plan: { slug: string; name: string };
+  trial?: { eligible: boolean; active: boolean; ends_at: string | null; days: number };
   usage: UsageRow[];
   upgrade: UpgradeOffer | null;
+}
+
+interface TrialResponse {
+  ok: boolean;
+  plan_name?: string;
+  ends_at?: string;
+  message?: string;
 }
 
 function openBrowser(url: string): void {
@@ -78,9 +86,53 @@ export function registerUpgradeTool(server: McpServer) {
         .string()
         .optional()
         .describe("Plan slug to open (e.g. 'pro', 'business'). Defaults to the recommended plan."),
+      start_trial: z
+        .boolean()
+        .optional()
+        .describe("Start the free no-card trial immediately, if you're eligible."),
     },
-    async ({ open, plan }) => {
+    async ({ open, plan, start_trial }) => {
       try {
+        // Starting the trial first means the plan snapshot below already
+        // reflects the new allowance, so the user sees their unblocked state
+        // in the same response instead of having to re-run the tool.
+        if (start_trial) {
+          const trial: TrialResponse = await apiFetch<TrialResponse>("/trial", {
+            method: "POST",
+            body: JSON.stringify({ feature: "mcp_write_actions" }),
+          }).catch((err: unknown) => ({
+            ok: false,
+            message: err instanceof Error ? err.message : "Could not start the trial.",
+          }));
+
+          if (!trial.ok) {
+            return {
+              content: [
+                {
+                  type: "text" as const,
+                  text:
+                    `Could not start a trial: ${trial.message ?? "unknown error"}\n\n` +
+                    `Run \`upgrade\` to see your paid options.`,
+                },
+              ],
+              isError: true,
+            };
+          }
+
+          const data = await apiFetch<PlanResponse>("/plan");
+          return {
+            content: [
+              {
+                type: "text" as const,
+                text:
+                  `✅ ${trial.message ?? "Your trial is active."}\n` +
+                  `   Ends ${trial.ends_at ? new Date(trial.ends_at).toDateString() : "soon"}.\n` +
+                  renderUsage(data),
+              },
+            ],
+          };
+        }
+
         const data = await apiFetch<PlanResponse>("/plan");
 
         const sections: string[] = [renderUsage(data)];

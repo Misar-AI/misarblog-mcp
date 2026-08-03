@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "misarblog": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@misarblog/mcp@latest"
+      ],
+      "env": {
+        "MISARBLOG_API_KEY": "mbk_YOUR_KEY_HERE"
+      }
+    }
+  }
+}

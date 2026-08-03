@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { apiFetch } from "../lib/api-client.js";
 import { formatError } from "../lib/errors.js";
+import { withUsageFooter } from "../lib/usage.js";
 
 interface Article {
   id: string;
@@ -81,7 +82,11 @@ export function registerArticleTools(server: McpServer) {
           content: [
             {
               type: "text",
-              text: `Article ${action} successfully!\n\nURL: ${article.url}\nEditor: ${article.editor_url}\n\n${JSON.stringify(article, null, 2)}`,
+              // withUsageFooter appends the 80% allowance warning when the
+              // caller is close to their limit — and nothing otherwise.
+              text: withUsageFooter(
+                `Article ${action} successfully!\n\nURL: ${article.url}\nEditor: ${article.editor_url}\n\n${JSON.stringify(article, null, 2)}`,
+              ),
             },
           ],
         };
@@ -109,7 +114,9 @@ export function registerArticleTools(server: McpServer) {
           content: [
             {
               type: "text",
-              text: `Draft saved!\n\nEditor: ${draft.editor_url}\n\n${JSON.stringify(draft, null, 2)}`,
+              text: withUsageFooter(
+                `Draft saved!\n\nEditor: ${draft.editor_url}\n\n${JSON.stringify(draft, null, 2)}`,
+              ),
             },
           ],
         };
@@ -145,7 +152,9 @@ export function registerArticleTools(server: McpServer) {
           method: "PATCH",
           body: JSON.stringify(body),
         });
-        return { content: [{ type: "text", text: JSON.stringify(article, null, 2) }] };
+        return {
+          content: [{ type: "text", text: withUsageFooter(JSON.stringify(article, null, 2)) }],
+        };
       } catch (err) {
         return { content: [{ type: "text", text: `Error: ${formatError(err)}` }], isError: true };
       }

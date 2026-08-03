@@ -2,6 +2,7 @@ import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { buildServer } from "./server.js";
 import { httpContext, runWithContext } from "./lib/context.js";
+import { authGuidance } from "./lib/auth-guidance.js";
 
 /**
  * Streamable HTTP transport for the Misar.Blog MCP server.
@@ -104,7 +105,7 @@ export function createBlogHttpHandler(options: BlogHttpOptions) {
           error: {
             code: -32001,
             message:
-              "Unauthorized: provide Authorization: Bearer mbk_<key>. Create one at https://www.misar.blog/dashboard/settings/api-keys",
+              authGuidance("missing"),
           },
         }),
         {
