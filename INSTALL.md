@@ -36,10 +36,10 @@ npx -y @misarblog/mcp@latest
 
 | Platform | How | Artifact | Notes |
 | --- | --- | --- | --- |
-| Claude.ai (web) | Custom connector | `connectors/claude-web.json` | Remote URL: `https://www.misar.blog/api/mcp` |
+| Claude.ai (web) | Custom connector | `connectors/claude-web.json` | Remote URL: `https://api.misar.io/blog/mcp` |
 | Smithery | `npx -y @smithery/cli install misar/misarblog-mcp --client claude` | `smithery.yaml` | Hosted, no local install |
 | ChatGPT (Custom GPT) | Actions → import schema | `customgpt/openapi.json` + `customgpt/gpt-config.json` | Bearer auth with your API key |
-| Any MCP client over HTTP | Streamable HTTP | `connectors/remote-http.json` | `https://www.misar.blog/api/mcp` |
+| Any MCP client over HTTP | Streamable HTTP | `connectors/remote-http.json` | `https://api.misar.io/blog/mcp` |
 | MCP registry | `server.json` | `server.json`, `.well-known/` | `io.github.mrgulshanyadav/misarblog-mcp` |
 
 ## Agents and skills

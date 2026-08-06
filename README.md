@@ -51,7 +51,7 @@ Ready-made configs for every client live in [`connectors/`](./connectors).
   "mcpServers": {
     "misarblog": {
       "type": "streamable-http",
-      "url": "https://www.misar.blog/api/mcp",
+      "url": "https://api.misar.io/blog/mcp",
       "headers": { "Authorization": "Bearer mbk_your_key_here" }
     }
   }

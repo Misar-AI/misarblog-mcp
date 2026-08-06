@@ -39,7 +39,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://www.misar.blog/api/mcp",
+      "url": "https://api.misar.io/blog/mcp",
       "headers": [
         {
           "name": "Authorization",

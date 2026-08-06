@@ -1,7 +1,7 @@
 {
   "note": "Claude.ai → Settings → Connectors → Add custom connector",
   "name": "Misar.Blog",
-  "remote_mcp_url": "https://www.misar.blog/api/mcp",
+  "remote_mcp_url": "https://api.misar.io/blog/mcp",
   "authentication": {
     "type": "bearer",
     "header": "Authorization",

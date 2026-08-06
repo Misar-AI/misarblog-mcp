@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://www.misar.blog/api"
+      "url": "https://api.misar.io/blog"
     }
   ],
   "paths": {
