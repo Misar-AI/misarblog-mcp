@@ -1,11 +1,11 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.mrgulshanyadav/misarblog-mcp",
+  "name": "io.github.misar-ai/misarblog-mcp",
   "title": "Misar.Blog MCP Server",
   "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics \u2014 from any AI assistant.",
   "version": "5.0.3",
   "repository": {
-    "url": "https://github.com/mrgulshanyadav/misarblog-mcp",
+    "url": "https://github.com/Misar-AI/misarblog-mcp",
     "source": "github"
   },
   "websiteUrl": "https://www.misar.blog",

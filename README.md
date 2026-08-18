@@ -164,6 +164,6 @@ Every action does.
 - Documentation — https://docs.misar.io/blog
 - Smithery — https://smithery.ai/server/misar/misarblog-mcp
 - npm — https://www.npmjs.com/package/@misarblog/mcp
-- Source — https://github.com/mrgulshanyadav/misarblog-mcp
+- Source — https://github.com/Misar-AI/misarblog-mcp
 
 MIT © [Misar AI](https://misar.io)

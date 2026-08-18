@@ -68,7 +68,7 @@ jobs:
             --body "## Add Misar.Blog MCP Server
 
           **Name**: Misar.Blog MCP Server
-          **Repository**: https://github.com/mrgulshanyadav/misarblog-mcp
+          **Repository**: https://github.com/Misar-AI/misarblog-mcp
           **npm**: https://www.npmjs.com/package/@misarblog/mcp
           **Category**: Email / Marketing
 
@@ -130,7 +130,7 @@ jobs:
             --title "Add Misar.Blog MCP Server" \
             --body "## Misar.Blog MCP Server
 
-          - **Repository**: https://github.com/mrgulshanyadav/misarblog-mcp
+          - **Repository**: https://github.com/Misar-AI/misarblog-mcp
           - **npm**: https://www.npmjs.com/package/@misarblog/mcp
           - **Category**: Email / Marketing
           - **Tools**: 32 tools — campaigns, contacts, templates, automations, analytics, deliverability, WhatsApp
@@ -158,7 +158,7 @@ jobs:
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST https://mcpmarket.com/api/submit-url \
             -H "Content-Type: application/json" \
-            -d '{"url":"https://github.com/mrgulshanyadav/misarblog-mcp"}')
+            -d '{"url":"https://github.com/Misar-AI/misarblog-mcp"}')
           echo "HTTP status: ${HTTP_STATUS}"
           {
             echo "### mcpmarket.com"
@@ -175,7 +175,7 @@ jobs:
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST https://mcpserverhub.net/api/submit \
             -H "Content-Type: application/json" \
-            -d '{"name":"Misar.Blog MCP Server","url":"https://github.com/mrgulshanyadav/misarblog-mcp","category":"blogging","config":{"command":"npx","args":["@misarblog/mcp"],"env":{"MISARBLOG_API_KEY":"<your_key>"}}}')
+            -d '{"name":"Misar.Blog MCP Server","url":"https://github.com/Misar-AI/misarblog-mcp","category":"blogging","config":{"command":"npx","args":["@misarblog/mcp"],"env":{"MISARBLOG_API_KEY":"<your_key>"}}}')
           echo "HTTP status: ${HTTP_STATUS}"
           {
             echo "### mcpserverhub.net"
