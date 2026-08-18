@@ -161,7 +161,7 @@ Every action does.
 
 - Website — https://www.misar.blog
 - App — https://www.misar.blog
-- Documentation — https://docs.misar.io/blog/mcp
+- Documentation — https://docs.misar.io/blog
 - Smithery — https://smithery.ai/server/misar/misarblog-mcp
 - npm — https://www.npmjs.com/package/@misarblog/mcp
 - Source — https://github.com/mrgulshanyadav/misarblog-mcp

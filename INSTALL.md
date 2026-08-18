@@ -61,4 +61,4 @@ npx -y @misarblog/mcp@latest <<< '{"jsonrpc":"2.0","id":1,"method":"tools/list",
 Every tool call without a key returns setup instructions naming the sign-in URL,
 the dashboard URL, and where to put the key.
 
-Docs: https://docs.misar.io/blog/mcp
+Docs: https://docs.misar.io/blog

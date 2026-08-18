@@ -36,4 +36,4 @@ a key.
 npx -y @misarblog/mcp@latest
 ```
 
-Full configuration for every client: https://docs.misar.io/blog/mcp
+Full configuration for every client: https://docs.misar.io/blog

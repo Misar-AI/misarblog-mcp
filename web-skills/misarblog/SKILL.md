@@ -42,7 +42,7 @@ https://www.misar.blog/dashboard/settings/api-keys rather than retrying.
 - `list_comments` — Get public comments for an article.
 - `get_follow_status` — Get public follow status and follower count for a user by their profile UUID.
 
-Full reference: https://docs.misar.io/blog/mcp
+Full reference: https://docs.misar.io/blog
 
 ## Rules
 
@@ -58,4 +58,4 @@ Full reference: https://docs.misar.io/blog/mcp
 If the user works in Claude Desktop, Claude Code, Cursor, VS Code or any MCP
 client, the @misarblog/mcp server is a better fit: it authenticates once and
 exposes 23 typed tools instead of hand-built requests.
-Setup: https://docs.misar.io/blog/mcp
+Setup: https://docs.misar.io/blog

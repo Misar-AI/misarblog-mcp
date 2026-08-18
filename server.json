@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.mrgulshanyadav/misarblog-mcp",
   "title": "Misar.Blog MCP Server",
-  "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.",
-  "version": "2.0.0",
+  "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics \u2014 from any AI assistant.",
+  "version": "5.0.3",
   "repository": {
     "url": "https://github.com/mrgulshanyadav/misarblog-mcp",
     "source": "github"
@@ -13,7 +13,7 @@
     {
       "registryType": "npm",
       "identifier": "@misarblog/mcp",
-      "version": "2.0.0",
+      "version": "5.0.3",
       "runtimeHint": "npx",
       "transport": {
         "type": "stdio"
@@ -21,7 +21,7 @@
       "environmentVariables": [
         {
           "name": "MISARBLOG_API_KEY",
-          "description": "Your Misar.Blog API key (mbk_…). Create one at https://www.misar.blog/dashboard/settings/api-keys, or omit it and run the \"login\" tool to authenticate via browser.",
+          "description": "Your Misar.Blog API key (mbk_\u2026). Create one at https://www.misar.blog/dashboard/settings/api-keys, or omit it and run the \"login\" tool to authenticate via browser.",
           "isRequired": false,
           "format": "string",
           "isSecret": true
@@ -43,7 +43,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Misar.Blog API key. Format: Bearer mbk_… — create one at https://www.misar.blog/dashboard/settings/api-keys",
+          "description": "Misar.Blog API key. Format: Bearer mbk_\u2026 \u2014 create one at https://www.misar.blog/dashboard/settings/api-keys",
           "isRequired": true,
           "isSecret": true
         }

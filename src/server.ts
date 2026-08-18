@@ -141,6 +141,6 @@ export function describeServer(options: BuildServerOptions = {}) {
     })),
     resources: Object.keys(server._registeredResources ?? {}),
     auth: "Bearer mbk_* — Dashboard → Settings → API Keys",
-    docs: "https://docs.misar.io/blog/mcp",
+    docs: "https://docs.misar.io/blog",
   };
 }

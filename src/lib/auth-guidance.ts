@@ -12,7 +12,7 @@ export const AUTH_URLS = {
   authorize: "https://www.misar.blog/authorize",
   /** Dashboard page where a key is created by hand. */
   apiKeys: "https://www.misar.blog/dashboard/settings/api-keys",
-  docs: "https://docs.misar.io/blog/mcp",
+  docs: "https://docs.misar.io/blog",
 } as const;
 
 /**

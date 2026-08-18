@@ -5,7 +5,7 @@
     "logoUrl": "https://www.misar.blog/logo-light.png"
   },
   "websiteUrl": "https://www.misar.blog",
-  "documentationUrl": "https://docs.misar.io/blog/mcp",
+  "documentationUrl": "https://docs.misar.io/blog",
   "authentication": {
     "required": true,
     "schemes": [
