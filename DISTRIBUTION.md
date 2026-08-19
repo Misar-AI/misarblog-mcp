@@ -15,7 +15,7 @@ Keywords set in package.json — npm indexes these for search.
 
 ## Smithery.ai
 
-URL: https://smithery.ai/server/@misarblog/mcp
+URL: https://smithery.ai/servers/@misarblog/mcp
 
 Smithery auto-discovers the package from npm. After publishing:
 1. Visit https://smithery.ai and search `@misarblog/mcp`

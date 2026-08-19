@@ -3,7 +3,7 @@
 > Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.
 
 [![npm](https://img.shields.io/npm/v/@misarblog/mcp)](https://www.npmjs.com/package/@misarblog/mcp)
-[![smithery](https://img.shields.io/badge/smithery-misar%2Fmisarblog--mcp-blue)](https://smithery.ai/server/misar/misarblog-mcp)
+[![smithery](https://img.shields.io/badge/smithery-misar%2Fmisarblog--mcp-blue)](https://smithery.ai/servers/misar/misarblog-mcp)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 **23 tools · 8 prompts · 5 resources · 6 agent skills**
@@ -162,7 +162,8 @@ Every action does.
 - Website — https://www.misar.blog
 - App — https://www.misar.blog
 - Documentation — https://docs.misar.io/blog
-- Smithery — https://smithery.ai/server/misar/misarblog-mcp
+- Smithery — https://smithery.ai/servers/misar/misarblog-mcp
+- Smithery skills — [publish-blog-post](https://smithery.ai/skills/misar/publish-blog-post), [seo-optimize-article](https://smithery.ai/skills/misar/seo-optimize-article), [promote-article](https://smithery.ai/skills/misar/promote-article), [manage-article-series](https://smithery.ai/skills/misar/manage-article-series), [blog-analytics-report](https://smithery.ai/skills/misar/blog-analytics-report), [newsletter-campaign-report](https://smithery.ai/skills/misar/newsletter-campaign-report)
 - npm — https://www.npmjs.com/package/@misarblog/mcp
 - Source — https://github.com/Misar-AI/misarblog-mcp
 
