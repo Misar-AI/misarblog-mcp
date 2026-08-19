@@ -1,0 +1,288 @@
+{
+  "$schema": "https://developers.openai.com/apps-sdk/schemas/chatgpt-app-submission.v1.json",
+  "schema_version": 1,
+  "app_info": {
+    "display_name": "Misar.Blog",
+    "subtitle": "Publish and analyse blog content",
+    "description": "Misar.Blog lets users draft, publish and update articles and series, manage comments, reactions and newsletter subscribers, generate cover images, and read traffic and revenue analytics — from ChatGPT.",
+    "category": "BUSINESS"
+  },
+  "tools": {
+    "upgrade": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "get_profile": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "get_analytics_summary": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "list_my_articles": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "get_article": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "publish_article": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "create_draft": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "update_article": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "search_articles": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "research_topic": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "generate_title_seo": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "suggest_titles": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "generate_cover_image": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "get_series": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "create_series": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "add_to_series": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "list_comments": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "get_follow_status": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "list_newsletter_subscribers": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "list_newsletter_issues": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "get_reactions": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Only retrieves or computes data to return to the user; it does not change Misar.Blog records.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "add_reaction": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Does not delete, revoke or irreversibly overwrite anything; any change it makes can be undone by a subsequent call."
+      }
+    },
+    "remove_reaction": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Can create, update, send, schedule or otherwise change Misar.Blog state.",
+        "open_world_justification": "Reaches the hosted Misar.Blog API over the network, so results depend on live account state outside this conversation.",
+        "destructive_justification": "Deletes, withdraws or irreversibly overwrites data, so it needs confirmation before use."
+      }
+    }
+  }
+}
