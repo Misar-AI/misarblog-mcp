@@ -12,10 +12,35 @@ import { formatError } from "../lib/errors.js";
  * and unmetered.
  */
 export function registerFollowTools(server: McpServer): void {
-  server.tool(
+  server.registerTool(
     "get_follow_status",
-    "Get follow status and follower count for a profile UUID. Requires an API key; counts against your plan's request quota.",
-    { user_id: z.string().uuid().describe("UUID of the profile to check follow status for") },
+    {
+      title: "Get follow status",
+      description:
+        "Check whether the authenticated account follows a given profile, and how many " +
+        "followers that profile has.\n\n" +
+        "Use it before offering to follow someone, so you do not suggest an action that is " +
+        "already done. It answers about ONE profile identified by UUID — there is no tool " +
+        "here that lists everyone you follow.\n\n" +
+        "Reads only; following state is not changed. Requires an API key and counts against " +
+        "the plan's request quota. Returns the follow relationship and follower count. " +
+        "Errors if the UUID does not match a profile.",
+      inputSchema: {
+        user_id: z
+          .string()
+          .uuid()
+          .describe(
+            "UUID of the profile to check, as returned in author fields by article tools. " +
+              "Not the username.",
+          ),
+      },
+      annotations: {
+        readOnlyHint: true,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: true,
+      },
+    },
     async ({ user_id }) => {
       try {
         const data = await apiFetch(`/follows?user_id=${encodeURIComponent(user_id)}`);

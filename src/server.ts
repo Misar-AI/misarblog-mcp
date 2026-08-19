@@ -18,7 +18,10 @@ import { PROMPTS } from "./prompts.js";
 import { RESOURCES } from "./resources.js";
 
 export const SERVER_NAME = "misarblog";
-export const SERVER_VERSION = "2.0.0";
+// Keep in step with package.json — this is what `initialize` reports as
+// serverInfo.version, and directories display it. It sat at 2.0.0 through four
+// releases, so every scanner showed this server three majors behind npm.
+export const SERVER_VERSION = "5.1.0";
 
 export interface BuildServerOptions {
   /**

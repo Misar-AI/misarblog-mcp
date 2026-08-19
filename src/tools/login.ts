@@ -99,13 +99,53 @@ function listenOnFreePort(
 }
 
 export function registerLoginTool(server: McpServer) {
-  server.tool(
+  server.registerTool(
     "login",
-    "Authenticate with your Misar.Blog account via browser — no API key copy-paste needed. Opens the Misar.Blog authorization page where you review the requested permissions and click 'Authorize'. Your API key is delivered straight back to this client and saved to ~/.misarblog/config.json.",
     {
-      port: z.number().int().min(PORT_MIN).max(PORT_MAX).optional().describe("Local callback port (9001–9099). Random by default."),
-      base_url: z.string().url().optional().describe("Misar.Blog base URL for self-hosted instances."),
-      force: z.boolean().optional().describe("Force re-authentication even if already logged in (rotates your API key)."),
+      title: "Log in via browser",
+      description:
+        "Connect a Misar.Blog account by browser consent, with no API key to copy and " +
+        "paste.\n\n" +
+        "Use it when `status` reports no key, or when a tool fails as unauthenticated. It " +
+        "opens the authorisation page in the user's browser, waits for them to review the " +
+        "permissions and click Authorize, then stores the returned key in " +
+        "`~/.misarblog/config.json`.\n\n" +
+        "Two things to know before calling it. It BLOCKS until a human acts in the browser, " +
+        "so it can hang for as long as they take — never call it speculatively or in a " +
+        "retry loop. And `force=true` ROTATES the key, invalidating the existing one " +
+        "everywhere else it is used; without force, an already-valid session returns " +
+        "immediately and changes nothing. It listens on a short-lived local port to receive " +
+        "the callback.",
+      inputSchema: {
+        port: z
+          .number()
+          .int()
+          .min(PORT_MIN)
+          .max(PORT_MAX)
+          .optional()
+          .describe(
+            "Local port for the one-shot callback listener, 9001-9099. Random by default; " +
+              "set it only when a firewall requires a fixed port.",
+          ),
+        base_url: z
+          .string()
+          .url()
+          .optional()
+          .describe("Base URL of a self-hosted Misar.Blog. Omit for the hosted service."),
+        force: z
+          .boolean()
+          .optional()
+          .describe(
+            "Re-authenticate even when already logged in. This ROTATES the API key and " +
+              "breaks any other client using the old one — only on explicit request.",
+          ),
+      },
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: false,
+        idempotentHint: false,
+        openWorldHint: true,
+      },
     },
     async ({ port: preferredPort, base_url, force }) => {
       // Guard: if already authenticated and key is valid, skip the login flow

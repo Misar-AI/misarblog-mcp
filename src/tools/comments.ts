@@ -13,13 +13,47 @@ import { formatError } from "../lib/errors.js";
  * never do: read the platform outside the metered, versioned API.
  */
 export function registerCommentTools(server: McpServer): void {
-  server.tool(
+  server.registerTool(
     "list_comments",
-    "Get the comment thread for an article. Requires an API key; counts against your plan's request quota.",
     {
-      article_id: z.string().uuid().describe("UUID of the article to fetch comments for"),
-      limit: z.number().int().min(1).max(100).optional().default(20),
-      offset: z.number().int().min(0).optional().default(0),
+      title: "List article comments",
+      description:
+        "Read the comment thread on one article, oldest first, paginated.\n\n" +
+        "Use it to review reader feedback or summarise a discussion. It reads comments only; " +
+        "there is no tool here for posting or moderating a reply.\n\n" +
+        "Reads only. Requires an API key and counts against the plan's request quota. Page " +
+        "through with limit and offset — the default returns the first 20. Returns the " +
+        "comments with their authors and timestamps; an empty list simply means no comments " +
+        "yet, which is not an error.",
+      inputSchema: {
+        article_id: z
+          .string()
+          .uuid()
+          .describe(
+            "UUID of the article, as returned in the `id` field by article tools. Not the slug.",
+          ),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(100)
+          .optional()
+          .default(20)
+          .describe("Comments per page, 1-100. Defaults to 20."),
+        offset: z
+          .number()
+          .int()
+          .min(0)
+          .optional()
+          .default(0)
+          .describe("Comments to skip before this page. Defaults to 0."),
+      },
+      annotations: {
+        readOnlyHint: true,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: true,
+      },
     },
     async ({ article_id, limit, offset }) => {
       try {

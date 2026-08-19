@@ -74,22 +74,51 @@ function renderUsage(data: PlanResponse): string {
 }
 
 export function registerUpgradeTool(server: McpServer) {
-  server.tool(
+  server.registerTool(
     "upgrade",
-    "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks. Call it any time — not only after hitting a limit. Set open=true to open the checkout page in your browser.",
     {
-      open: z
-        .boolean()
-        .optional()
-        .describe("Open the upgrade/checkout page in the default browser."),
-      plan: z
-        .string()
-        .optional()
-        .describe("Plan slug to open (e.g. 'pro', 'business'). Defaults to the recommended plan."),
-      start_trial: z
-        .boolean()
-        .optional()
-        .describe("Start the free no-card trial immediately, if you're eligible."),
+      title: "Show plan and quota, or upgrade",
+      description:
+        "Show the account's current plan, how much of each quota remains, and what a higher " +
+        "plan unlocks.\n\n" +
+        "Called with no arguments it only reads — useful any time, not just after hitting a " +
+        "limit, and the natural follow-up when a write tool reports a quota error. Two " +
+        "arguments make it act rather than report, so pass them only on explicit instruction " +
+        "from the user: `start_trial` ENROLS the account in the free trial immediately (a real " +
+        "account change, not a preview), and `open` LAUNCHES a checkout page in the user's " +
+        "browser. Neither charges a card by itself.\n\n" +
+        "Requires an API key. No billing state changes unless you pass start_trial; the " +
+        "returned quota snapshot already reflects a trial started in the same call. For " +
+        "whether you are authenticated at all, use `status`.",
+      inputSchema: {
+        open: z
+          .boolean()
+          .optional()
+          .describe(
+            "Open the checkout page in the user's default browser. Side effect on their " +
+              "desktop — only when they asked to upgrade.",
+          ),
+        plan: z
+          .string()
+          .optional()
+          .describe(
+            "Plan slug to open, e.g. 'pro' or 'business'. Defaults to the recommended plan. " +
+              "Only meaningful with open=true.",
+          ),
+        start_trial: z
+          .boolean()
+          .optional()
+          .describe(
+            "Enrol in the free no-card trial now, if eligible. This changes the account's " +
+              "plan — do not set it speculatively.",
+          ),
+      },
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: true,
+      },
     },
     async ({ open, plan, start_trial }) => {
       try {
