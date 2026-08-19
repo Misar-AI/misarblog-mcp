@@ -1,0 +1,67 @@
+{
+  "name": "Misar.Blog MCP Server",
+  "description": "Publish and manage blog posts, articles, and series on Misar.Blog directly from your AI agent. Features 23 tools: create/publish articles, manage series, query analytics, handle comments, reactions, newsletter subscribers, and AI-assisted content generation.",
+  "supportedInterfaces": [
+    {
+      "url": "https://api.misar.io/blog/mcp",
+      "protocolBinding": "mcp",
+      "protocolVersion": "2025-06-18"
+    }
+  ],
+  "provider": {
+    "organization": "Misar AI",
+    "url": "https://www.misar.blog"
+  },
+  "version": "5.1.0",
+  "documentationUrl": "https://github.com/Misar-AI/misarblog-mcp",
+  "iconUrl": "https://raw.githubusercontent.com/Misar-AI/misarblog-mcp/main/assets/icon-400.png",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extendedAgentCard": false
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "misarblog.content_publishing",
+      "name": "Blog content publishing",
+      "tags": [
+        "blogging",
+        "content-management",
+        "publishing",
+        "seo",
+        "analytics",
+        "mcp"
+      ],
+      "examples": [
+        "Draft an article about our Q3 launch and save it as a draft for review.",
+        "Publish the onboarding guide and add it to the Getting Started series.",
+        "How did the blog perform over the last 30 days?"
+      ],
+      "description": "Publish and manage blog posts, articles, and series on Misar.Blog directly from your AI agent. Features 23 tools: create/publish articles, manage series, query analytics, handle comments, reactions, newsletter subscribers, and AI-assisted content generation. Exposed as 23 MCP tools; every tool carries behavioural annotations describing whether it reads, writes, or is destructive."
+    }
+  ],
+  "securitySchemes": {
+    "apiKey": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "Misar.Blog API key (prefix mbk_), sent as a bearer token or as ?apiKey=. Also readable from MISARBLOG_API_KEY on the stdio server. Discovery methods answer without it; every tool call requires it."
+    }
+  },
+  "securityRequirements": [
+    {
+      "schemes": {
+        "apiKey": {
+          "values": []
+        }
+      }
+    }
+  ]
+}
