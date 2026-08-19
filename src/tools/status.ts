@@ -7,6 +7,7 @@ interface ProfileResponse {
   username: string;
 }
 
+/** Register the `status` authentication check (stdio only). */
 export function registerStatusTool(server: McpServer) {
   server.registerTool(
     "status",

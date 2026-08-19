@@ -98,6 +98,7 @@ function listenOnFreePort(
   });
 }
 
+/** Register the browser-based `login` tool (stdio only). */
 export function registerLoginTool(server: McpServer) {
   server.registerTool(
     "login",

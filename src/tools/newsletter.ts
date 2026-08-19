@@ -3,6 +3,7 @@ import { z } from "zod";
 import { apiFetch } from "../lib/api-client.js";
 import { formatError } from "../lib/errors.js";
 
+/** Register the newsletter subscriber and issue listing tools. */
 export function registerNewsletterTools(server: McpServer): void {
   server.registerTool(
     "list_newsletter_subscribers",

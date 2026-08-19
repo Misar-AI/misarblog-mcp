@@ -7,6 +7,7 @@
  * browser path, the manual API-key path with a real URL, and where the key goes.
  */
 
+/** Where a user goes to authorise or manage keys, by environment. */
 export const AUTH_URLS = {
   /** Consent screen used by the `login` tool's browser handshake. */
   authorize: "https://www.misar.blog/authorize",
@@ -25,8 +26,11 @@ export const AUTH_URLS = {
  */
 export const HAS_BROWSER_LOGIN = true;
 
+/** Prefix every Misar.Blog API key carries, used to validate pasted input. */
 export const KEY_PREFIX = "mbk_";
+/** Environment variable the stdio server reads its API key from. */
 export const ENV_KEY = "MISARBLOG_API_KEY";
+/** Where `login` writes the key it receives. */
 export const CONFIG_PATH = "~/.misarblog/config.json";
 
 /**

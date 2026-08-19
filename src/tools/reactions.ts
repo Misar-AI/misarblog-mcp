@@ -5,6 +5,7 @@ import { formatError } from "../lib/errors.js";
 
 const REACTION_TYPES = ["like", "clap", "bookmark"] as const;
 
+/** Register the reaction read/add/remove tools. */
 export function registerReactionTools(server: McpServer): void {
   server.registerTool(
     "get_reactions",

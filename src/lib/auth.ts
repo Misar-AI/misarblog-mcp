@@ -19,12 +19,14 @@ function loadConfig(): MisarConfig {
   }
 }
 
+/** Persist the API key and base URL to the local config file. */
 export function saveConfig(config: MisarConfig): void {
   mkdirSync(join(homedir(), ".misarblog"), { recursive: true });
   const existing = loadConfig();
   writeFileSync(CONFIG_PATH, JSON.stringify({ ...existing, ...config }, null, 2), "utf8");
 }
 
+/** Read the API key, throwing a guiding error when none is configured. */
 export function getApiKey(): string {
   const envKey = process.env.MISARBLOG_API_KEY?.trim();
   if (envKey) return envKey;
@@ -40,6 +42,7 @@ export function getApiKey(): string {
   );
 }
 
+/** Read the API key, or null when none is configured. */
 export function tryGetApiKey(): string | null {
   try {
     return getApiKey();
@@ -48,6 +51,7 @@ export function tryGetApiKey(): string | null {
   }
 }
 
+/** Resolve the API base URL, honouring any self-hosted override. */
 export function getBaseUrl(): string {
   const envUrl = (process.env.MISARBLOG_BASE_URL ?? "").trim();
   if (envUrl) return envUrl.replace(/\/$/, "") + "/api/v1";

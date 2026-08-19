@@ -33,7 +33,7 @@ export const SERVER_NAME = "misarblog";
 // serverInfo.version, and directories display it. It sat at 2.0.0 through four
 // releases, so every scanner showed this server three majors behind npm.
 /** Package version reported by `initialize`. Keep in step with package.json. */
-export const SERVER_VERSION = "5.1.1";
+export const SERVER_VERSION = "5.1.2";
 
 /** Options accepted by {@link buildServer} and {@link describeServer}. */
 export interface BuildServerOptions {

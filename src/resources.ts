@@ -77,6 +77,7 @@ export interface ResourceContents {
   contents: Array<{ uri: string; mimeType: string; text: string }>;
 }
 
+/** Every resource this server exposes, as `resources/list` returns them. */
 export function listResources(): ResourceSummary[] {
   return RESOURCES.map(({ uri, name, description, mimeType }) => ({
     uri,
@@ -86,6 +87,7 @@ export function listResources(): ResourceSummary[] {
   }));
 }
 
+/** Read one resource by URI, or null when no such resource exists. */
 export async function readResource(uri: string): Promise<ResourceContents | null> {
   const resource = BY_URI.get(uri);
   if (!resource) return null;

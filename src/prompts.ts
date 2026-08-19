@@ -183,6 +183,7 @@ export interface RenderedPrompt {
   messages: Array<{ role: "user"; content: { type: "text"; text: string } }>;
 }
 
+/** Every prompt this server exposes, as `prompts/list` returns them. */
 export function listPrompts(): PromptSummary[] {
   return PROMPTS.map(({ name, description, arguments: args }) => ({
     name,
@@ -191,6 +192,7 @@ export function listPrompts(): PromptSummary[] {
   }));
 }
 
+/** Render one prompt by name, or null when no such prompt exists. */
 export function getPrompt(name: string, args: Record<string, string> = {}): RenderedPrompt | null {
   const prompt = BY_NAME.get(name);
   if (!prompt) return null;

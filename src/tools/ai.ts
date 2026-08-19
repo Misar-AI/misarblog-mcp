@@ -23,6 +23,7 @@ function formatTitles(titles: TitleResult[]): string {
     .join("\n\n");
 }
 
+/** Register the AI research and title-generation tools. */
 export function registerAiTools(server: McpServer) {
   server.registerTool(
     "research_topic",

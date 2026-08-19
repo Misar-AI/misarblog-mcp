@@ -5,6 +5,7 @@ import { formatError } from "../lib/errors.js";
 import { readFile } from "fs/promises";
 import { createReadStream } from "fs";
 
+/** Controls whether filesystem-dependent image tools are registered. */
 export interface ImageToolOptions {
   /**
    * `upload_image` reads a file from the local filesystem, so it is registered
@@ -14,6 +15,7 @@ export interface ImageToolOptions {
   includeLocalTools?: boolean;
 }
 
+/** Register cover-image generation, plus local upload on stdio only. */
 export function registerImageTools(server: McpServer, options: ImageToolOptions = {}) {
   if (options.includeLocalTools) {
   server.registerTool(

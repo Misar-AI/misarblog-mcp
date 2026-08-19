@@ -12,6 +12,7 @@ interface Series {
   article_count?: number;
 }
 
+/** Register the series listing, creation and membership tools. */
 export function registerSeriesTools(server: McpServer) {
   server.registerTool(
     "get_series",

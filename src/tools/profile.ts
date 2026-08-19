@@ -20,6 +20,7 @@ interface AnalyticsResponse {
   active_subscribers: number;
 }
 
+/** Register the profile and analytics tools. */
 export function registerProfileTools(server: McpServer) {
   server.registerTool(
     "get_profile",

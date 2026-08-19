@@ -73,6 +73,7 @@ function renderUsage(data: PlanResponse): string {
   return out.join("\n");
 }
 
+/** Register the plan, quota and upgrade tool. */
 export function registerUpgradeTool(server: McpServer) {
   server.registerTool(
     "upgrade",

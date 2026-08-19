@@ -1,6 +1,6 @@
 {
   "name": "@misarblog/mcp",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "license": "MIT",
   "exports": {
     ".": "./src/index.ts",

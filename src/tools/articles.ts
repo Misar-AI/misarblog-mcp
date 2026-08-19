@@ -17,6 +17,7 @@ interface Article {
   tags?: string[];
 }
 
+/** Register the article lifecycle tools: list, get, publish, draft, update, search. */
 export function registerArticleTools(server: McpServer) {
   server.registerTool(
     "list_my_articles",
