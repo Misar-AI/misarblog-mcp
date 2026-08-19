@@ -1,0 +1,19 @@
+{
+  "name": "@misarblog/mcp",
+  "version": "5.1.1",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts",
+    "./http": "./src/http.ts",
+    "./server": "./src/server.ts"
+  },
+  "publish": {
+    "include": [
+      "src",
+      "README.md",
+      "LICENSE",
+      "jsr.json",
+      "server.json"
+    ]
+  }
+}

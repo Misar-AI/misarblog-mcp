@@ -6,6 +6,7 @@ import { apiFetch } from "./lib/api-client.js";
  * eagerly, so anything large or paginated belongs in a tool instead.
  */
 
+/** A readable resource: its metadata plus the reader that fetches it. */
 export interface ResourceDefinition {
   uri: string;
   name: string;
@@ -14,6 +15,7 @@ export interface ResourceDefinition {
   read: () => Promise<unknown>;
 }
 
+/** Every resource this server exposes. */
 export const RESOURCES: ResourceDefinition[] = [
   {
     uri: "misarblog://profile",
@@ -57,7 +59,25 @@ export const RESOURCES: ResourceDefinition[] = [
 
 const BY_URI = new Map(RESOURCES.map((r) => [r.uri, r]));
 
-export function listResources() {
+/** One resource as advertised by `resources/list`. */
+export interface ResourceSummary {
+  /** URI to pass to {@link readResource}. */
+  uri: string;
+  /** Human-readable name. */
+  name: string;
+  /** What the resource contains. */
+  description: string;
+  /** MIME type of the contents. */
+  mimeType: string;
+}
+
+/** The contents of one resource, as returned by `resources/read`. */
+export interface ResourceContents {
+  /** One block per resource; text blocks carry JSON. */
+  contents: Array<{ uri: string; mimeType: string; text: string }>;
+}
+
+export function listResources(): ResourceSummary[] {
   return RESOURCES.map(({ uri, name, description, mimeType }) => ({
     uri,
     name,
@@ -66,7 +86,7 @@ export function listResources() {
   }));
 }
 
-export async function readResource(uri: string) {
+export async function readResource(uri: string): Promise<ResourceContents | null> {
   const resource = BY_URI.get(uri);
   if (!resource) return null;
   const data = await resource.read();

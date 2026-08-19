@@ -1,3 +1,13 @@
+/**
+ * The Misar.Blog tool catalogue.
+ *
+ * {@link buildServer} is the single factory both transports use, so a tool
+ * fixed here is fixed everywhere. {@link describeServer} renders the same
+ * surface as plain data, for directories that describe the server without
+ * connecting to it.
+ *
+ * @module
+ */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
@@ -17,12 +27,15 @@ import { registerReactionTools } from "./tools/reactions.js";
 import { PROMPTS } from "./prompts.js";
 import { RESOURCES } from "./resources.js";
 
+/** Server id reported by `initialize`, e.g. shown by directories. */
 export const SERVER_NAME = "misarblog";
 // Keep in step with package.json — this is what `initialize` reports as
 // serverInfo.version, and directories display it. It sat at 2.0.0 through four
 // releases, so every scanner showed this server three majors behind npm.
-export const SERVER_VERSION = "5.1.0";
+/** Package version reported by `initialize`. Keep in step with package.json. */
+export const SERVER_VERSION = "5.1.1";
 
+/** Options accepted by {@link buildServer} and {@link describeServer}. */
 export interface BuildServerOptions {
   /**
    * Register tools that only make sense on the user's own machine.
@@ -113,6 +126,31 @@ function registerResources(server: McpServer): void {
 }
 
 /**
+ * A machine-readable summary of what this server offers.
+ *
+ * Directories and registries read this to describe the server without
+ * connecting to it.
+ */
+export interface ServerDescription {
+  /** Server id, e.g. `misarblog`. */
+  name: string;
+  /** Package version, as reported by `initialize`. */
+  version: string;
+  /** Transport this server speaks. */
+  transport: string;
+  /** Every registered tool, with its description. */
+  tools: Array<{ name: string; description: string }>;
+  /** Every registered prompt, with its description. */
+  prompts: Array<{ name: string; description: string }>;
+  /** URIs of every registered resource. */
+  resources: string[];
+  /** How to authenticate, in a form meant for humans. */
+  auth: string;
+  /** Documentation URL. */
+  docs: string;
+}
+
+/**
  * Machine-readable summary of the server's surface.
  *
  * Derived from a real `buildServer()` rather than a hand-written list: the
@@ -123,7 +161,7 @@ function registerResources(server: McpServer): void {
  * enumeration; the shapes are pinned by the exact-versioned SDK dependency and
  * covered by a test, so a breaking change surfaces at CI rather than in prod.
  */
-export function describeServer(options: BuildServerOptions = {}) {
+export function describeServer(options: BuildServerOptions = {}): ServerDescription {
   const server = buildServer(options) as unknown as {
     _registeredTools: Record<string, { description?: string }>;
     _registeredPrompts: Record<string, { description?: string }>;

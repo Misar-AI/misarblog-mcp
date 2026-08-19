@@ -1,5 +1,24 @@
 #!/usr/bin/env node
+/**
+ * Misar.Blog MCP server — stdio entrypoint.
+ *
+ * Running this module starts the server over stdio, which is how Claude
+ * Desktop, Claude Code, Cursor and other local MCP clients launch it. For the
+ * hosted HTTP transport see `./http`; for the tool catalogue itself see
+ * `./server`.
+ *
+ * @example
+ * ```jsonc
+ * // claude_desktop_config.json
+ * { "mcpServers": { "misarblog": {
+ *     "command": "npx", "args": ["-y", "@misarblog/mcp"],
+ *     "env": { "MISARBLOG_API_KEY": "mbk_..." } } } }
+ * ```
+ *
+ * @module
+ */
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { buildServer } from "./server.js";
 
 /**
@@ -16,7 +35,7 @@ async function main() {
 }
 
 /** Entry point used by Smithery's sandbox scanner, which imports rather than execs. */
-export function createSandboxServer() {
+export function createSandboxServer(): McpServer {
   return buildServer({ includeLocalTools: true });
 }
 

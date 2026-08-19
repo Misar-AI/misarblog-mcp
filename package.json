@@ -1,8 +1,8 @@
 {
   "name": "@misarblog/mcp",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "mcpName": "io.github.Misar-AI/misarblog-mcp",
-  "description": "Misar.Blog MCP server \u2014 publish and manage articles, series, comments, reactions, newsletters, AI writing tools, cover-image generation, and analytics from Claude, Cursor, VS Code, Windsurf, and any MCP client.",
+  "description": "Misar.Blog MCP server — publish and manage articles, series, comments, reactions, newsletters, AI writing tools, cover-image generation, and analytics from Claude, Cursor, VS Code, Windsurf, and any MCP client.",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
