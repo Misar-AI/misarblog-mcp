@@ -32,6 +32,11 @@ jobs:
         with:
           node-version: '20'
 
+      # jsr publish type-checks the real source, so the SDK it imports must be
+      # present. It passed locally only because node_modules already existed.
+      - name: Install dependencies
+        run: npm ci
+
       - name: Align jsr.json with the released version
         run: |
           VERSION=$(node -p "require('./package.json').version")
