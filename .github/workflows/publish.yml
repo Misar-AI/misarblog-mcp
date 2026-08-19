@@ -137,5 +137,22 @@ jobs:
       - name: Authenticate via GitHub OIDC
         run: ./mcp-publisher login github-oidc
 
+      # server.json carries its own version, and mcp-publisher publishes exactly
+      # what is committed. When only package.json was bumped, this job failed
+      # with "cannot publish duplicate version" AFTER npm had already gone out —
+      # a half-done release. Derive it here so the two cannot drift.
+      - name: Align server.json with the released version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          node -e '
+            const fs = require("fs");
+            const v = process.argv[1];
+            const s = JSON.parse(fs.readFileSync("server.json", "utf8"));
+            s.version = v;
+            for (const p of s.packages ?? []) p.version = v;
+            fs.writeFileSync("server.json", JSON.stringify(s, null, 2) + "\n");
+          ' "$VERSION"
+          echo "server.json set to ${VERSION}"
+
       - name: Publish server.json
         run: ./mcp-publisher publish
