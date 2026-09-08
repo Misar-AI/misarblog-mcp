@@ -1,13 +1,3 @@
-/**
- * Streamable HTTP transport for the Misar.Blog MCP server.
- *
- * Exposes {@link createBlogHttpHandler}, which turns the shared tool catalogue
- * into a Web-standard `Request` → `Response` handler. Authentication and rate
- * limiting are injected by the host rather than implemented here, so the same
- * catalogue serves both stdio and HTTP without diverging.
- *
- * @module
- */
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { buildServer } from "./server.js";
@@ -26,14 +16,12 @@ import { authGuidance } from "./lib/auth-guidance.js";
  * AsyncLocalStorage for the duration of the call rather than in module state.
  */
 
-/** An authenticated caller, as resolved by the host's `authenticate` hook. */
 export interface BlogCaller {
   userId: string;
   /** The raw API key to forward to the REST API on this caller's behalf. */
   apiKey: string;
 }
 
-/** Host-supplied hooks and configuration for {@link createBlogHttpHandler}. */
 export interface BlogHttpOptions {
   /** Resolve an Authorization header to a caller, or null when invalid. */
   authenticate: (authHeader: string | null) => Promise<BlogCaller | null>;
@@ -71,16 +59,7 @@ function rpcError(code: number, message: string, status = 200): Response {
   });
 }
 
-/** Handles one HTTP request against the MCP endpoint. */
-export type BlogHttpHandler = (request: Request) => Promise<Response>;
-
-/**
- * Build a Web-standard request handler for the MCP endpoint.
- *
- * @param options Authentication, rate limiting and the API base URL.
- * @returns A handler taking a `Request` and resolving to a `Response`.
- */
-export function createBlogHttpHandler(options: BlogHttpOptions): BlogHttpHandler {
+export function createBlogHttpHandler(options: BlogHttpOptions) {
   const { authenticate, rateLimit, baseUrl, onError } = options;
 
   async function getOrCreateSession(sessionId: string | null): Promise<Session> {
@@ -164,7 +143,6 @@ export function createBlogHttpHandler(options: BlogHttpOptions): BlogHttpHandler
   };
 }
 
-/** Standard CORS preflight response for the MCP endpoint. */
 export function corsPreflight(): Response {
   return new Response(null, {
     status: 204,

@@ -3,42 +3,21 @@ import { z } from "zod";
 import { apiFetch } from "../lib/api-client.js";
 import { formatError } from "../lib/errors.js";
 
-/** Register the newsletter subscriber and issue listing tools. */
 export function registerNewsletterTools(server: McpServer): void {
   server.registerTool(
     "list_newsletter_subscribers",
     {
-      title: "List newsletter subscribers",
-      description:
-        "List the people subscribed to the authenticated account's newsletter, paginated.\n\n" +
-        "Use it to size the audience or export the list. For what has been SENT to them, use " +
-        "list_newsletter_issues instead.\n\n" +
-        "Reads only — no email is sent and no subscriber is added or removed. Requires an API " +
-        "key. This returns personal data (email addresses), so treat the result as " +
-        "confidential and do not echo it into shared transcripts. Page with limit and offset; " +
-        "the default returns the first 20.",
+      title: "List subscribers",
+      description: "Get your newsletter subscriber list. Requires API key authentication.",
       inputSchema: {
-        limit: z
-          .number()
-          .int()
-          .min(1)
-          .max(100)
-          .optional()
-          .default(20)
-          .describe("Subscribers per page, 1-100. Defaults to 20."),
-        offset: z
-          .number()
-          .int()
-          .min(0)
-          .optional()
-          .default(0)
-          .describe("Subscribers to skip before this page. Defaults to 0."),
+        limit: z.number().int().min(1).max(100).optional().default(20),
+        offset: z.number().int().min(0).optional().default(0),
       },
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: true,
+        openWorldHint: false,
       },
     },
     async ({ limit, offset }) => {
@@ -56,28 +35,13 @@ export function registerNewsletterTools(server: McpServer): void {
     "list_newsletter_issues",
     {
       title: "List newsletter issues",
-      description:
-        "List newsletter issues the account has sent or scheduled, newest first.\n\n" +
-        "Use it to check what went out and when, or to confirm a scheduled send exists before " +
-        "queueing another. For WHO receives them, use list_newsletter_subscribers.\n\n" +
-        "Reads only — this neither sends nor cancels an issue. Requires an API key. Returns " +
-        "each issue with its subject, status and send time. An empty list means nothing has " +
-        "been sent yet, which is not an error.",
-      inputSchema: {
-        limit: z
-          .number()
-          .int()
-          .min(1)
-          .max(50)
-          .optional()
-          .default(10)
-          .describe("Issues to return, 1-50, newest first. Defaults to 10."),
-      },
+      description: "Get your sent and scheduled newsletter issues. Requires API key authentication.",
+      inputSchema: { limit: z.number().int().min(1).max(50).optional().default(10) },
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: true,
+        openWorldHint: false,
       },
     },
     async ({ limit }) => {

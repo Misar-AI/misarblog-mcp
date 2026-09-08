@@ -3,7 +3,7 @@
 > Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.
 
 [![npm](https://img.shields.io/npm/v/@misarblog/mcp)](https://www.npmjs.com/package/@misarblog/mcp)
-[![smithery](https://img.shields.io/badge/smithery-misar%2Fmisarblog--mcp-blue)](https://smithery.ai/servers/misar/misarblog-mcp)
+[![smithery](https://img.shields.io/badge/smithery-misar%2Fmisarblog--mcp-blue)](https://smithery.ai/server/misar/misarblog-mcp)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 **23 tools · 8 prompts · 5 resources · 6 agent skills**
@@ -51,7 +51,7 @@ Ready-made configs for every client live in [`connectors/`](./connectors).
   "mcpServers": {
     "misarblog": {
       "type": "streamable-http",
-      "url": "https://api.misar.io/blog/mcp",
+      "url": "https://www.misar.blog/api/mcp",
       "headers": { "Authorization": "Bearer mbk_your_key_here" }
     }
   }
@@ -94,8 +94,8 @@ Self-hosted instances: set `MISARBLOG_BASE_URL`.
 | `get_series` | List all your series on Misar.Blog. |
 | `create_series` | Create a new series to group related articles. |
 | `add_to_series` | Add an existing article to a series. |
-| `list_comments` | Get public comments for an article. |
-| `get_follow_status` | Get public follow status and follower count for a user by their profile UUID. |
+| `list_comments` | Get the comment thread for an article. |
+| `get_follow_status` | Get follow status and follower count for a profile UUID. |
 | `list_newsletter_subscribers` | Get your newsletter subscriber list. |
 | `list_newsletter_issues` | Get your sent and scheduled newsletter issues. |
 | `get_reactions` | Get reaction counts and your reactions for an article. |
@@ -161,9 +161,8 @@ Every action does.
 
 - Website — https://www.misar.blog
 - App — https://www.misar.blog
-- Documentation — https://docs.misar.io/blog
-- Smithery — https://smithery.ai/servers/misar/misarblog-mcp
-- Smithery skills — [publish-blog-post](https://smithery.ai/skills/misar/publish-blog-post), [seo-optimize-article](https://smithery.ai/skills/misar/seo-optimize-article), [promote-article](https://smithery.ai/skills/misar/promote-article), [manage-article-series](https://smithery.ai/skills/misar/manage-article-series), [blog-analytics-report](https://smithery.ai/skills/misar/blog-analytics-report), [newsletter-campaign-report](https://smithery.ai/skills/misar/newsletter-campaign-report)
+- Documentation — https://docs.misar.io/blog/mcp
+- Smithery — https://smithery.ai/server/misar/misarblog-mcp
 - npm — https://www.npmjs.com/package/@misarblog/mcp
 - Source — https://github.com/Misar-AI/misarblog-mcp
 

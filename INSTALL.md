@@ -36,10 +36,10 @@ npx -y @misarblog/mcp@latest
 
 | Platform | How | Artifact | Notes |
 | --- | --- | --- | --- |
-| Claude.ai (web) | Custom connector | `connectors/claude-web.json` | Remote URL: `https://api.misar.io/blog/mcp` |
+| Claude.ai (web) | Custom connector | `connectors/claude-web.json` | Remote URL: `https://www.misar.blog/api/mcp` |
 | Smithery | `npx -y @smithery/cli install misar/misarblog-mcp --client claude` | `smithery.yaml` | Hosted, no local install |
 | ChatGPT (Custom GPT) | Actions → import schema | `customgpt/openapi.json` + `customgpt/gpt-config.json` | Bearer auth with your API key |
-| Any MCP client over HTTP | Streamable HTTP | `connectors/remote-http.json` | `https://api.misar.io/blog/mcp` |
+| Any MCP client over HTTP | Streamable HTTP | `connectors/remote-http.json` | `https://www.misar.blog/api/mcp` |
 | MCP registry | `server.json` | `server.json`, `.well-known/` | `io.github.Misar-AI/misarblog-mcp` |
 
 ## Agents and skills
@@ -61,4 +61,4 @@ npx -y @misarblog/mcp@latest <<< '{"jsonrpc":"2.0","id":1,"method":"tools/list",
 Every tool call without a key returns setup instructions naming the sign-in URL,
 the dashboard URL, and where to put the key.
 
-Docs: https://docs.misar.io/blog
+Docs: https://docs.misar.io/blog/mcp

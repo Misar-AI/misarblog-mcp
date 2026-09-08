@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://api.misar.io/blog"
+      "url": "https://www.misar.blog/api"
     }
   ],
   "paths": {
@@ -510,7 +510,7 @@
     "/mcp/tools/list_comments": {
       "post": {
         "operationId": "list_comments",
-        "summary": "Get public comments for an article. Rate-limited by IP — no API key required.",
+        "summary": "Get the comment thread for an article. Requires an API key; counts against your plan's request quota.",
         "requestBody": {
           "required": false,
           "content": {
@@ -541,7 +541,7 @@
     "/mcp/tools/get_follow_status": {
       "post": {
         "operationId": "get_follow_status",
-        "summary": "Get public follow status and follower count for a user by their profile UUID. No API key required.",
+        "summary": "Get follow status and follower count for a profile UUID. Requires an API key; counts against your plan's request quota.",
         "requestBody": {
           "required": false,
           "content": {

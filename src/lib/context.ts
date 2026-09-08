@@ -35,7 +35,6 @@ export function currentContext(): BlogContext | null {
   return storage.getStore() ?? null;
 }
 
-/** Build a per-request context carrying the caller's key and API base. */
 export function httpContext(apiKey: string, baseUrl: string): BlogContext {
   return { apiKey, baseUrl: baseUrl.replace(/\/$/, ""), source: "mcp_http" };
 }

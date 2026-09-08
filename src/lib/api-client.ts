@@ -17,7 +17,6 @@ function resolve(): { key: string; base: string; source: string } {
   return { key: getApiKey(), base: getBaseUrl(), source: "mcp_stdio" };
 }
 
-/** Call the Misar.Blog REST API with the caller's key, returning parsed JSON. */
 export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
   const { key, base, source } = resolve();
   const res = await fetch(`${base}${path}`, {
@@ -39,7 +38,6 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
   return body as T;
 }
 
-/** Upload multipart form data to the Misar.Blog API (used for images). */
 export async function apiUpload<T>(path: string, form: FormData): Promise<T> {
   const { key, base, source } = resolve();
   const res = await fetch(`${base}${path}`, {

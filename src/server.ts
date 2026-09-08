@@ -1,13 +1,3 @@
-/**
- * The Misar.Blog tool catalogue.
- *
- * {@link buildServer} is the single factory both transports use, so a tool
- * fixed here is fixed everywhere. {@link describeServer} renders the same
- * surface as plain data, for directories that describe the server without
- * connecting to it.
- *
- * @module
- */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
@@ -26,16 +16,11 @@ import { registerReactionTools } from "./tools/reactions.js";
 
 import { PROMPTS } from "./prompts.js";
 import { RESOURCES } from "./resources.js";
+import { withUsageFooter } from "./lib/usage.js";
 
-/** Server id reported by `initialize`, e.g. shown by directories. */
 export const SERVER_NAME = "misarblog";
-// Keep in step with package.json — this is what `initialize` reports as
-// serverInfo.version, and directories display it. It sat at 2.0.0 through four
-// releases, so every scanner showed this server three majors behind npm.
-/** Package version reported by `initialize`. Keep in step with package.json. */
-export const SERVER_VERSION = "5.1.2";
+export const SERVER_VERSION = "2.0.0";
 
-/** Options accepted by {@link buildServer} and {@link describeServer}. */
 export interface BuildServerOptions {
   /**
    * Register tools that only make sense on the user's own machine.
@@ -56,10 +41,73 @@ export interface BuildServerOptions {
  * respectively, overlapping but never identical — so a tool fixed in one place
  * stayed broken in the other two.
  */
+/**
+ * Append the pre-emptive usage warning to every tool result, once, centrally.
+ *
+ * This used to be called by hand inside individual tool handlers, and only
+ * three of them in tools/articles.ts ever did — so ten other tool groups
+ * silently never warned anyone. Wrapping registration means a tool added later
+ * inherits it without having to remember.
+ *
+ * `upgrade` is exempt: it already renders the full quota table, so a footer
+ * would repeat what the user is looking at.
+ */
+function withUsageDrain(server: McpServer): McpServer {
+  /**
+   * Patch one registration method (`tool` or `registerTool`) with the same
+   * generic wrapper.
+   *
+   * Both methods are positionally generic here: `args[0]` is always the tool
+   * name and `args[args.length - 1]` is always the handler, regardless of
+   * whether the call is the deprecated `tool(name, description, schema, cb)`
+   * shape or `registerTool(name, config, cb)`'s three-argument shape. Tool
+   * files register annotations via `registerTool`'s config object, but this
+   * wrapper never inspects that object, so it needed no change to keep
+   * draining usage footers once tools moved off the deprecated `tool()` call.
+   */
+  const wrap = (methodName: "tool" | "registerTool") => {
+    const target = server as unknown as Record<string, (...a: unknown[]) => unknown>;
+    const original = target[methodName].bind(server);
+
+    target[methodName] = (...args: unknown[]) => {
+      const name = args[0];
+      const last = args.length - 1;
+      const handler = args[last];
+
+      if (typeof name === "string" && name !== "upgrade" && typeof handler === "function") {
+        const fn = handler as (...h: unknown[]) => Promise<unknown>;
+        args[last] = async (...hargs: unknown[]) => {
+          const result = (await fn(...hargs)) as {
+            content?: { type?: string; text?: string }[];
+            isError?: boolean;
+          };
+          // Never decorate a failure: the error path already carries the full
+          // upgrade card when the block was a plan limit.
+          if (result?.isError) return result;
+          const first = result?.content?.[0];
+          if (first?.type === "text" && typeof first.text === "string") {
+            const next = withUsageFooter(first.text);
+            if (next !== first.text) {
+              return { ...result, content: [{ ...first, text: next }, ...result.content!.slice(1)] };
+            }
+          }
+          return result;
+        };
+      }
+      return original(...args);
+    };
+  };
+
+  wrap("tool");
+  wrap("registerTool");
+
+  return server;
+}
+
 export function buildServer(options: BuildServerOptions = {}): McpServer {
   const { includeLocalTools = false } = options;
 
-  const server = new McpServer({ name: SERVER_NAME, version: SERVER_VERSION });
+  const server = withUsageDrain(new McpServer({ name: SERVER_NAME, version: SERVER_VERSION }));
 
   if (includeLocalTools) {
     registerLoginTool(server);
@@ -126,31 +174,6 @@ function registerResources(server: McpServer): void {
 }
 
 /**
- * A machine-readable summary of what this server offers.
- *
- * Directories and registries read this to describe the server without
- * connecting to it.
- */
-export interface ServerDescription {
-  /** Server id, e.g. `misarblog`. */
-  name: string;
-  /** Package version, as reported by `initialize`. */
-  version: string;
-  /** Transport this server speaks. */
-  transport: string;
-  /** Every registered tool, with its description. */
-  tools: Array<{ name: string; description: string }>;
-  /** Every registered prompt, with its description. */
-  prompts: Array<{ name: string; description: string }>;
-  /** URIs of every registered resource. */
-  resources: string[];
-  /** How to authenticate, in a form meant for humans. */
-  auth: string;
-  /** Documentation URL. */
-  docs: string;
-}
-
-/**
  * Machine-readable summary of the server's surface.
  *
  * Derived from a real `buildServer()` rather than a hand-written list: the
@@ -161,7 +184,7 @@ export interface ServerDescription {
  * enumeration; the shapes are pinned by the exact-versioned SDK dependency and
  * covered by a test, so a breaking change surfaces at CI rather than in prod.
  */
-export function describeServer(options: BuildServerOptions = {}): ServerDescription {
+export function describeServer(options: BuildServerOptions = {}) {
   const server = buildServer(options) as unknown as {
     _registeredTools: Record<string, { description?: string }>;
     _registeredPrompts: Record<string, { description?: string }>;
@@ -182,6 +205,6 @@ export function describeServer(options: BuildServerOptions = {}): ServerDescript
     })),
     resources: Object.keys(server._registeredResources ?? {}),
     auth: "Bearer mbk_* — Dashboard → Settings → API Keys",
-    docs: "https://docs.misar.io/blog",
+    docs: "https://docs.misar.io/blog/mcp",
   };
 }

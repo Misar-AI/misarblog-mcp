@@ -15,30 +15,16 @@ export function registerFollowTools(server: McpServer): void {
   server.registerTool(
     "get_follow_status",
     {
-      title: "Get follow status",
-      description:
-        "Check whether the authenticated account follows a given profile, and how many " +
-        "followers that profile has.\n\n" +
-        "Use it before offering to follow someone, so you do not suggest an action that is " +
-        "already done. It answers about ONE profile identified by UUID — there is no tool " +
-        "here that lists everyone you follow.\n\n" +
-        "Reads only; following state is not changed. Requires an API key and counts against " +
-        "the plan's request quota. Returns the follow relationship and follower count. " +
-        "Errors if the UUID does not match a profile.",
+      title: "Follow status",
+      description: "Get follow status and follower count for a profile UUID. Requires an API key; counts against your plan's request quota.",
       inputSchema: {
-        user_id: z
-          .string()
-          .uuid()
-          .describe(
-            "UUID of the profile to check, as returned in author fields by article tools. " +
-              "Not the username.",
-          ),
+        user_id: z.string().uuid().describe("UUID of the profile to check follow status for"),
       },
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: true,
+        openWorldHint: false,
       },
     },
     async ({ user_id }) => {

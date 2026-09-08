@@ -40,11 +40,19 @@ const mockReadFileSync = vi.mocked(readFileSync);
 /** Creates a minimal MCP server mock that captures registered tools */
 function makeMockServer() {
   const handlers: Record<string, (...args: unknown[]) => Promise<unknown>> = {};
+  // The handler is always the last positional argument, whether a tool is
+  // registered via the deprecated `tool(name, description, schema, cb)` shape
+  // or the current `registerTool(name, config, cb)` shape — mirroring how
+  // `withUsageDrain` in src/server.ts stays agnostic to which one was used.
+  const capture = (...args: unknown[]) => {
+    const name = args[0] as string;
+    const handler = args[args.length - 1] as (...a: unknown[]) => Promise<unknown>;
+    handlers[name] = handler;
+  };
   return {
     server: {
-      tool: vi.fn((name: string, _desc: string, _schema: unknown, handler: (...args: unknown[]) => Promise<unknown>) => {
-        handlers[name] = handler;
-      }),
+      tool: vi.fn(capture),
+      registerTool: vi.fn(capture),
     } as unknown as McpServer,
     call: (name: string, args: Record<string, unknown> = {}) => {
       const h = handlers[name];

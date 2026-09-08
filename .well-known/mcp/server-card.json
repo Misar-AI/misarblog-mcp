@@ -5,7 +5,7 @@
     "logoUrl": "https://www.misar.blog/logo-light.png"
   },
   "websiteUrl": "https://www.misar.blog",
-  "documentationUrl": "https://docs.misar.io/blog",
+  "documentationUrl": "https://docs.misar.io/blog/mcp",
   "authentication": {
     "required": true,
     "schemes": [
@@ -85,11 +85,11 @@
     },
     {
       "name": "list_comments",
-      "description": "Get public comments for an article. Rate-limited by IP — no API key required."
+      "description": "Get the comment thread for an article. Requires an API key; counts against your plan's request quota."
     },
     {
       "name": "get_follow_status",
-      "description": "Get public follow status and follower count for a user by their profile UUID. No API key required."
+      "description": "Get follow status and follower count for a profile UUID. Requires an API key; counts against your plan's request quota."
     },
     {
       "name": "list_newsletter_subscribers",

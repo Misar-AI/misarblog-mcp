@@ -7,29 +7,19 @@ interface ProfileResponse {
   username: string;
 }
 
-/** Register the `status` authentication check (stdio only). */
 export function registerStatusTool(server: McpServer) {
   server.registerTool(
     "status",
     {
-      title: "Check authentication status",
+      title: "Check status",
       description:
-        "Report whether this client holds a working Misar.Blog API key, and which account it " +
-        "belongs to.\n\n" +
-        "Run it first when anything is failing with an auth error, and before a run of write " +
-        "operations, so you find out up front rather than midway. It distinguishes three " +
-        "states: no key stored, a key that is stored but rejected, and a valid key with its " +
-        "username. If it reports no key, run `login`.\n\n" +
-        "Reads only; it never creates or rotates a key — `login` does that. Takes no " +
-        "parameters. Unlike most tools here it does not fail when unauthenticated: 'not " +
-        "authenticated' is a normal successful answer, not an error. For plan and quota, use " +
-        "`upgrade`; for the full profile, get_profile.",
+        "Check whether you are authenticated with Misar.Blog and which account is connected. Run this first to verify your connection.",
       inputSchema: {},
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: true,
+        openWorldHint: false,
       },
     },
     async () => {
