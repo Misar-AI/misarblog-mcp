@@ -53,7 +53,7 @@ startCommand:
 
 tools:
   - name: upgrade
-    description: "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks. Call it any time — not only after hitting a limit. Set open=true to open the checkout page in your browser."
+    description: "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks, with the link to upgrade. Call it any time — not only after hitting a limit. Reads only: it never changes the plan or takes payment; the user upgrades by following the link. On a local install, open=true also opens that link in the user's browser."
   - name: get_profile
     description: "Get your Misar.Blog creator profile"
   - name: get_analytics_summary

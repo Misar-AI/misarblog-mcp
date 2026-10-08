@@ -24,7 +24,7 @@ a key.
 
 1. **Read before you write.** Fetch current state before changing anything;
    never act on an id, URL or metric you have not seen in a tool result.
-2. **Confirm anything the outside world sees.** These are irreversible and must be confirmed with the user first: remove_reaction.
+2. **Confirm anything the outside world sees.** These are irreversible and must be confirmed with the user first: update_article, remove_reaction.
 3. **Report failures honestly.** If a tool errors, say what failed and why.
    Never present an unverified result as done.
 4. **Stay in scope.** Use Misar.Blog tools for Misar.Blog work; do

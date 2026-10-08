@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { execFileSync } from "child_process";
+import { currentContext } from "../lib/context.js";
 import { apiFetch } from "../lib/api-client.js";
 import { formatError } from "../lib/errors.js";
 import { renderUpgradeOffer, type UpgradeOffer } from "../lib/upgrade.js";
@@ -79,12 +80,12 @@ export function registerUpgradeTool(server: McpServer) {
     {
       title: "Plan usage and upgrade",
       description:
-        "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks. Call it any time — not only after hitting a limit. Set open=true to open the checkout page in your browser.",
+        "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks, with the link to upgrade. Call it any time — not only after hitting a limit. Reads only: it never changes the plan or takes payment; the user upgrades by following the link. On a local install, open=true also opens that link in the user's browser.",
       inputSchema: {
         open: z
           .boolean()
           .optional()
-          .describe("Open the upgrade/checkout page in the default browser."),
+          .describe("Local installs only: also open the upgrade link in the user's browser. Ignored by the hosted server, which returns the link instead."),
         plan: z
           .string()
           .optional()
@@ -167,8 +168,15 @@ export function registerUpgradeTool(server: McpServer) {
             : data.upgrade?.plans.find((p) => p.recommended);
           const url = chosen?.url ?? data.upgrade?.urls.compare;
           if (url) {
-            openBrowser(url);
-            sections.push(`  Opened ${url} in your browser.\n`);
+            // Only a local (stdio) install runs on the user's machine. The hosted
+            // HTTP server must never launch a process on its own host for a remote
+            // caller, so there it just hands back the link.
+            if (currentContext()?.source === "mcp_http") {
+              sections.push(`  Upgrade here: ${url}\n`);
+            } else {
+              openBrowser(url);
+              sections.push(`  Opened ${url} in your browser.\n`);
+            }
           }
         }
 

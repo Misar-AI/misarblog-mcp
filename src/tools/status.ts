@@ -19,7 +19,7 @@ export function registerStatusTool(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async () => {

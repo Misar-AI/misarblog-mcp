@@ -27,7 +27,7 @@ export function registerCommentTools(server: McpServer): void {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ article_id, limit, offset }) => {

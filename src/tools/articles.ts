@@ -33,7 +33,7 @@ export function registerArticleTools(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ status, limit }) => {
@@ -58,7 +58,7 @@ export function registerArticleTools(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ slug }) => {
@@ -137,7 +137,7 @@ export function registerArticleTools(server: McpServer) {
         readOnlyHint: false,
         destructiveHint: false,
         idempotentHint: false,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async (args) => {
@@ -179,9 +179,9 @@ export function registerArticleTools(server: McpServer) {
         // it is not treated as the "publish" event itself — consistent with
         // mail's update_contact, which stays closed-world for the same reason.
         readOnlyHint: false,
-        destructiveHint: false,
+        destructiveHint: true,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ id, ...fields }) => {
@@ -226,7 +226,7 @@ export function registerArticleTools(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ q, tag, author, limit }) => {

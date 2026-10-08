@@ -78,7 +78,7 @@ Self-hosted instances: set `MISARBLOG_BASE_URL`.
 
 | Tool | Description |
 | --- | --- |
-| `upgrade` | Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks. |
+| `upgrade` | Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks, with the link to upgrade. |
 | `get_profile` | Get your Misar.Blog creator profile. |
 | `get_analytics_summary` | Get analytics summary (views, revenue, subscribers) for a time period. |
 | `list_my_articles` | List your articles on Misar.Blog. |

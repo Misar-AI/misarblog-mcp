@@ -23,7 +23,7 @@ export function registerSeriesTools(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async () => {
@@ -52,7 +52,7 @@ export function registerSeriesTools(server: McpServer) {
         readOnlyHint: false,
         destructiveHint: false,
         idempotentHint: false,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ title, description }) => {
@@ -88,7 +88,7 @@ export function registerSeriesTools(server: McpServer) {
         readOnlyHint: false,
         destructiveHint: false,
         idempotentHint: true,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ series_slug, article_slug, position }) => {

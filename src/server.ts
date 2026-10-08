@@ -1,3 +1,4 @@
+import { createRequire } from "node:module";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
@@ -19,7 +20,14 @@ import { RESOURCES } from "./resources.js";
 import { withUsageFooter } from "./lib/usage.js";
 
 export const SERVER_NAME = "misarblog";
-export const SERVER_VERSION = "2.0.0";
+/**
+ * Reported by `initialize`. Read from package.json (always shipped by npm, one
+ * level above dist/) so it can never drift from the published version again:
+ * the hardcoded "2.0.0" outlived several 5.x releases.
+ */
+export const SERVER_VERSION: string = (
+  createRequire(import.meta.url)("../package.json") as { version: string }
+).version;
 
 export interface BuildServerOptions {
   /**

@@ -30,7 +30,7 @@ export function registerImageTools(server: McpServer, options: ImageToolOptions 
         readOnlyHint: false,
         destructiveHint: false,
         idempotentHint: false,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ file_path }) => {
@@ -77,7 +77,7 @@ export function registerImageTools(server: McpServer, options: ImageToolOptions 
         readOnlyHint: false,
         destructiveHint: false,
         idempotentHint: false,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ prompt, size }) => {

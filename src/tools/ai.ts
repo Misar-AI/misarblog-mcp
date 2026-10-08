@@ -44,7 +44,7 @@ export function registerAiTools(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: false,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ query }) => {
@@ -95,7 +95,7 @@ export function registerAiTools(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: false,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ prompt, context }) => {
@@ -140,7 +140,7 @@ export function registerAiTools(server: McpServer) {
         readOnlyHint: true,
         destructiveHint: false,
         idempotentHint: false,
-        openWorldHint: false,
+        openWorldHint: true,
       },
     },
     async ({ context }) => {
