@@ -166,4 +166,4 @@ Every action does.
 - npm — https://www.npmjs.com/package/@misarblog/mcp
 - Source — https://github.com/Misar-AI/misarblog-mcp
 
-MIT © [Misar AI](https://misar.io)
+MIT © [Misar.AI](https://misar.io)

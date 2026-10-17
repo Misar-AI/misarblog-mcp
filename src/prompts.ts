@@ -3,7 +3,7 @@
  *
  * These are TEMPLATES: they return instructions for the calling client's model
  * to execute, which is the standard MCP contract. The previous versions on
- * /api/v1/mcp called a server-side `complete()` instead — that burned Misar AI
+ * /api/v1/mcp called a server-side `complete()` instead — that burned Misar.AI
  * credits on every prompt fetch, produced text the client had no way to steer,
  * and could not work at all on the stdio transport, where no inference
  * credential exists. Every tool name referenced below is a real tool in
