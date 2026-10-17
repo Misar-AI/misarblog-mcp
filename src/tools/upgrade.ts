@@ -80,7 +80,7 @@ export function registerUpgradeTool(server: McpServer) {
     {
       title: "Plan usage and upgrade",
       description:
-        "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks, with the link to upgrade. Call it any time — not only after hitting a limit. Reads only: it never changes the plan or takes payment; the user upgrades by following the link. On a local install, open=true also opens that link in the user's browser.",
+        "Show your current Misar.Blog plan, how much of each quota you have left, and what upgrading unlocks, with the link to upgrade. Call it any time — not only after hitting a limit. By default it only reads. With start_trial=true it starts the free, no-card trial on the account (a plan change; no payment is taken). It never upgrades a paid plan or takes payment itself: the user does that by following the link. On a local install, open=true also opens that link in the user's browser.",
       inputSchema: {
         open: z
           .boolean()
