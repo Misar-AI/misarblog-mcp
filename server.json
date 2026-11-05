@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Misar-AI/misarblog-mcp",
   "title": "Misar.Blog MCP Server",
-  "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI…",
-  "version": "5.1.9",
+  "description": "Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics…",
+  "version": "5.2.0",
   "repository": {
     "url": "https://github.com/Misar-AI/misarblog-mcp",
     "source": "github"
@@ -13,7 +13,7 @@
     {
       "registryType": "npm",
       "identifier": "@misarblog/mcp",
-      "version": "5.1.9",
+      "version": "5.2.0",
       "runtimeHint": "npx",
       "transport": {
         "type": "stdio"

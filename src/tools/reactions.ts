@@ -5,12 +5,19 @@ import { formatError } from "../lib/errors.js";
 
 const REACTION_TYPES = ["like", "clap", "bookmark"] as const;
 
+/**
+ * DEPRECATED. misar.blog replaced reactions with upvotes and saves, and
+ * /api/v1/reactions sunsets on 2027-02-03. These tools keep working until then
+ * so existing agents do not break; new work should use the tools in social.ts
+ * (`like` and `clap` map to upvote_article, `bookmark` to save_article).
+ */
+
 export function registerReactionTools(server: McpServer): void {
   server.registerTool(
     "get_reactions",
     {
       title: "Get reactions",
-      description: "Get reaction counts and your reactions for an article. Requires API key.",
+      description: "Deprecated (the v1 reactions API sunsets on 2027-02-03): get reaction counts and your reactions for an article. Use upvote_article / save_article for new work. Requires API key.",
       inputSchema: {
         article_id: z.string().uuid().describe("UUID of the article"),
       },
@@ -35,7 +42,7 @@ export function registerReactionTools(server: McpServer): void {
     "add_reaction",
     {
       title: "Add reaction",
-      description: "Add a reaction to an article. No-ops if already reacted. Requires API key.",
+      description: "Deprecated (the v1 reactions API sunsets on 2027-02-03): add a reaction to an article. Use upvote_article instead of like or clap, and save_article instead of bookmark. No-ops if already reacted. Requires API key.",
       inputSchema: {
         article_id: z.string().uuid().describe("UUID of the article"),
         type: z.enum(REACTION_TYPES).describe("Reaction type: like, clap, or bookmark"),
@@ -68,7 +75,7 @@ export function registerReactionTools(server: McpServer): void {
     "remove_reaction",
     {
       title: "Remove reaction",
-      description: "Remove a specific reaction from an article. Requires API key.",
+      description: "Deprecated (the v1 reactions API sunsets on 2027-02-03): remove a specific reaction from an article. Use remove_upvote / unsave_article for new work. Requires API key.",
       inputSchema: {
         article_id: z.string().uuid().describe("UUID of the article"),
         type: z.enum(REACTION_TYPES).describe("Reaction type to remove: like, clap, or bookmark"),

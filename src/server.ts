@@ -14,6 +14,7 @@ import { registerCommentTools } from "./tools/comments.js";
 import { registerFollowTools } from "./tools/follows.js";
 import { registerNewsletterTools } from "./tools/newsletter.js";
 import { registerReactionTools } from "./tools/reactions.js";
+import { registerSocialTools } from "./tools/social.js";
 
 import { PROMPTS } from "./prompts.js";
 import { RESOURCES } from "./resources.js";
@@ -130,6 +131,7 @@ export function buildServer(options: BuildServerOptions = {}): McpServer {
   registerCommentTools(server);
   registerFollowTools(server);
   registerNewsletterTools(server);
+  registerSocialTools(server);
   registerReactionTools(server);
 
   registerPrompts(server);

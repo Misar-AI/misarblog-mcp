@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Misar.Blog Actions",
-    "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.",
+    "description": "Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics — from any AI assistant.",
     "version": "1.0.0"
   },
   "servers": [
@@ -631,10 +631,258 @@
         }
       }
     },
+    "/mcp/tools/upvote_article": {
+      "post": {
+        "operationId": "upvote_article",
+        "summary": "Upvote an article as the account holder. Idempotent: upvoting again changes nothing. Returns {upvoted, upvote_count}. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
+    "/mcp/tools/remove_upvote": {
+      "post": {
+        "operationId": "remove_upvote",
+        "summary": "Remove your upvote from an article. Returns {upvoted: false, upvote_count}. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
+    "/mcp/tools/save_article": {
+      "post": {
+        "operationId": "save_article",
+        "summary": "Save an article to your saved list to read later. Idempotent. Returns {saved, save_count}. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
+    "/mcp/tools/unsave_article": {
+      "post": {
+        "operationId": "unsave_article",
+        "summary": "Remove an article from your saved list. Returns {saved: false, save_count}. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
+    "/mcp/tools/list_saved": {
+      "post": {
+        "operationId": "list_saved",
+        "summary": "List your saved articles, newest save first. Returns {items, next_cursor}; pass next_cursor back as cursor for the next page. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
+    "/mcp/tools/get_reputation": {
+      "post": {
+        "operationId": "get_reputation",
+        "summary": "Get a creator's reputation: score, tier and tier name, upvotes received, progress toward the next tier, and badges. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
+    "/mcp/tools/repost_article": {
+      "post": {
+        "operationId": "repost_article",
+        "summary": "Repost an article to your followers, with an optional note (up to 280 characters). Needs reputation tier 1; you cannot repost your own article; notes are moderated. Reposting again replaces the note. Returns {reposted, repost_count}. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
+    "/mcp/tools/remove_repost": {
+      "post": {
+        "operationId": "remove_repost",
+        "summary": "Undo your repost of an article. Returns {reposted: false, repost_count}. Requires an API key; counts against your plan's request quota.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid API key"
+          }
+        }
+      }
+    },
     "/mcp/tools/get_reactions": {
       "post": {
         "operationId": "get_reactions",
-        "summary": "Get reaction counts and your reactions for an article. Requires API key.",
+        "summary": "Deprecated (the v1 reactions API sunsets on 2027-02-03): get reaction counts and your reactions for an article. Use upvote_article / save_article for new work. Requires API key.",
         "requestBody": {
           "required": false,
           "content": {
@@ -665,38 +913,7 @@
     "/mcp/tools/add_reaction": {
       "post": {
         "operationId": "add_reaction",
-        "summary": "Add a reaction to an article. No-ops if already reacted. Requires API key.",
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Tool result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Missing or invalid API key"
-          }
-        }
-      }
-    },
-    "/mcp/tools/remove_reaction": {
-      "post": {
-        "operationId": "remove_reaction",
-        "summary": "Remove a specific reaction from an article. Requires API key.",
+        "summary": "Deprecated (the v1 reactions API sunsets on 2027-02-03): add a reaction to an article. Use upvote_article instead of like or clap, and save_article instead of bookmark. No-ops if already reacted. Requires API key.",
         "requestBody": {
           "required": false,
           "content": {

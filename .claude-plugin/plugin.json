@@ -1,7 +1,7 @@
 {
   "name": "misarblog",
-  "version": "5.1.9",
-  "description": "Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.",
+  "version": "5.2.0",
+  "description": "Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics — from any AI assistant.",
   "author": {
     "name": "Misar.AI",
     "email": "support@misar.io",

@@ -1,12 +1,12 @@
 # Misar.Blog MCP Server
 
-> Publish and manage articles, series, comments, reactions, newsletters, and analytics — from any AI assistant.
+> Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics — from any AI assistant.
 
 [![npm](https://img.shields.io/npm/v/@misarblog/mcp)](https://www.npmjs.com/package/@misarblog/mcp)
 [![smithery](https://img.shields.io/badge/smithery-misar%2Fmisarblog--mcp-blue)](https://smithery.ai/server/misar/misarblog-mcp)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-**23 tools · 8 prompts · 5 resources · 6 agent skills**
+**31 tools · 8 prompts · 5 resources · 6 agent skills**
 
 Works with Claude (Desktop, Code, and web), Cursor, VS Code, Windsurf, Cline,
 Zed, Gemini CLI, ChatGPT, and any other MCP-compatible client — over stdio or
@@ -98,9 +98,17 @@ Self-hosted instances: set `MISARBLOG_BASE_URL`.
 | `get_follow_status` | Get follow status and follower count for a profile UUID. |
 | `list_newsletter_subscribers` | Get your newsletter subscriber list. |
 | `list_newsletter_issues` | Get your sent and scheduled newsletter issues. |
-| `get_reactions` | Get reaction counts and your reactions for an article. |
-| `add_reaction` | Add a reaction to an article. |
-| `remove_reaction` | Remove a specific reaction from an article. |
+| `upvote_article` | Upvote an article as the account holder. |
+| `remove_upvote` | Remove your upvote from an article. |
+| `save_article` | Save an article to your saved list to read later. |
+| `unsave_article` | Remove an article from your saved list. |
+| `list_saved` | List your saved articles, newest save first. |
+| `get_reputation` | Get a creator's reputation: score, tier and tier name, upvotes received, progress toward the next tier, and badges. |
+| `repost_article` | Repost an article to your followers, with an optional note (up to 280 characters). |
+| `remove_repost` | Undo your repost of an article. |
+| `get_reactions` | Deprecated (the v1 reactions API sunsets on 2027-02-03): get reaction counts and your reactions for an article. |
+| `add_reaction` | Deprecated (the v1 reactions API sunsets on 2027-02-03): add a reaction to an article. |
+| `remove_reaction` | Deprecated (the v1 reactions API sunsets on 2027-02-03): remove a specific reaction from an article. |
 
 ## Prompts
 

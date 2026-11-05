@@ -1,7 +1,7 @@
 {
   "serverInfo": {
     "name": "Misar.Blog",
-    "version": "5.1.9",
+    "version": "5.2.0",
     "logoUrl": "https://www.misar.blog/logo-light.png"
   },
   "websiteUrl": "https://www.misar.blog",
@@ -100,16 +100,48 @@
       "description": "Get your sent and scheduled newsletter issues. Requires API key authentication."
     },
     {
+      "name": "upvote_article",
+      "description": "Upvote an article as the account holder. Idempotent: upvoting again changes nothing. Returns {upvoted, upvote_count}. Requires an API key; counts against your plan's request quota."
+    },
+    {
+      "name": "remove_upvote",
+      "description": "Remove your upvote from an article. Returns {upvoted: false, upvote_count}. Requires an API key; counts against your plan's request quota."
+    },
+    {
+      "name": "save_article",
+      "description": "Save an article to your saved list to read later. Idempotent. Returns {saved, save_count}. Requires an API key; counts against your plan's request quota."
+    },
+    {
+      "name": "unsave_article",
+      "description": "Remove an article from your saved list. Returns {saved: false, save_count}. Requires an API key; counts against your plan's request quota."
+    },
+    {
+      "name": "list_saved",
+      "description": "List your saved articles, newest save first. Returns {items, next_cursor}; pass next_cursor back as cursor for the next page. Requires an API key; counts against your plan's request quota."
+    },
+    {
+      "name": "get_reputation",
+      "description": "Get a creator's reputation: score, tier and tier name, upvotes received, progress toward the next tier, and badges. Requires an API key; counts against your plan's request quota."
+    },
+    {
+      "name": "repost_article",
+      "description": "Repost an article to your followers, with an optional note (up to 280 characters). Needs reputation tier 1; you cannot repost your own article; notes are moderated. Reposting again replaces the note. Returns {reposted, repost_count}. Requires an API key; counts against your plan's request quota."
+    },
+    {
+      "name": "remove_repost",
+      "description": "Undo your repost of an article. Returns {reposted: false, repost_count}. Requires an API key; counts against your plan's request quota."
+    },
+    {
       "name": "get_reactions",
-      "description": "Get reaction counts and your reactions for an article. Requires API key."
+      "description": "Deprecated (the v1 reactions API sunsets on 2027-02-03): get reaction counts and your reactions for an article. Use upvote_article / save_article for new work. Requires API key."
     },
     {
       "name": "add_reaction",
-      "description": "Add a reaction to an article. No-ops if already reacted. Requires API key."
+      "description": "Deprecated (the v1 reactions API sunsets on 2027-02-03): add a reaction to an article. Use upvote_article instead of like or clap, and save_article instead of bookmark. No-ops if already reacted. Requires API key."
     },
     {
       "name": "remove_reaction",
-      "description": "Remove a specific reaction from an article. Requires API key."
+      "description": "Deprecated (the v1 reactions API sunsets on 2027-02-03): remove a specific reaction from an article. Use remove_upvote / unsave_article for new work. Requires API key."
     }
   ],
   "prompts": [
