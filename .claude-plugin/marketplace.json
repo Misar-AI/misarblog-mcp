@@ -13,7 +13,7 @@
     {
       "name": "misarblog",
       "source": "https://github.com/Misar-AI/misarblog-mcp",
-      "description": "Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics — from any AI assistant.",
+      "description": "Publish and manage articles, series, upvotes, saved, reposts, reputation, newsletters and analytics — from any AI assistant.",
       "version": "5.2.0",
       "category": "writing",
       "strict": false

@@ -153,7 +153,7 @@ export const PROMPTS: PromptDefinition[] = [
     build: (a) =>
       `Report on my blog performance over the last ${a.days || "30"} days.\n\n` +
       "Gather: get_analytics_summary, list_my_articles (status=published), " +
-      "list_newsletter_subscribers, and get_reactions on the top articles.\n\n" +
+      "list_newsletter_subscribers, and get_reputation (upvotes received, tier and badges).\n\n" +
       "Report views, revenue, subscriber growth, and the best and worst performing article each " +
       "with a one-line reason. Close with the single highest-impact action for next month. " +
       "Keep it under 400 words, and state plainly if any figure was unavailable rather than estimating.",

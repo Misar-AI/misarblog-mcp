@@ -9,7 +9,8 @@ description: Report on Misar.Blog performance — views, revenue, subscribers, e
 
 - `get_analytics_summary` — views, revenue, subscribers over a window
 - `list_my_articles` (`status=published`) — what is live
-- `get_reactions` on top articles — engagement beyond raw views
+- `get_reputation` (your own username) — upvotes received, reputation score,
+  tier and badges: engagement beyond raw views
 - `list_newsletter_subscribers` — audience growth
 
 ## Interpret
@@ -18,8 +19,10 @@ Views alone say little. Useful framings:
 
 - **Views per article**, not just total — total rises simply by publishing more.
 - **Which topics** earn views, so the next piece is informed rather than guessed.
-- **Reactions relative to views** — a high-view, low-reaction piece usually
-  means the title over-promised.
+- **Upvotes relative to views** — a high-view, low-upvote piece usually means
+  the title over-promised. `get_reputation` reports upvotes received in total,
+  not per article, so compare it with total views and say so. Do not call
+  `upvote_article` or `save_article` to read a number: they change the account.
 - **Subscriber growth against publishing cadence** — the honest test of whether
   the writing converts readers.
 

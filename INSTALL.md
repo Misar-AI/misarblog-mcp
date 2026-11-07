@@ -1,6 +1,6 @@
 # Installing Misar.Blog — every platform
 
-Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics — from any AI assistant.
+Publish and manage articles, series, upvotes, saved, reposts, reputation, newsletters and analytics — from any AI assistant.
 
 31 tools · 8 prompts ·
 5 resources · 3 agents

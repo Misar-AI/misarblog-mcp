@@ -1,6 +1,6 @@
 # Misar.Blog MCP Server
 
-> Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics — from any AI assistant.
+> Publish and manage articles, series, upvotes, saved, reposts, reputation, newsletters and analytics — from any AI assistant.
 
 [![npm](https://img.shields.io/npm/v/@misarblog/mcp)](https://www.npmjs.com/package/@misarblog/mcp)
 [![smithery](https://img.shields.io/badge/smithery-misar%2Fmisarblog--mcp-blue)](https://smithery.ai/server/misar/misarblog-mcp)

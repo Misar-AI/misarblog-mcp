@@ -26,7 +26,14 @@ Always use the article's real URL from the API.
 
 ## Amplify
 
-- `get_reactions` — a post already resonating is the one worth promoting again.
+- `get_reputation` — upvotes received, tier and badges show how your audience
+  already responds, which helps decide what is worth promoting again.
+- `list_saved` — your saved articles, newest first. Use it to find a piece you
+  bookmarked to promote or reference.
+- `repost_article` — reposts another creator's article to your followers with
+  an optional note of up to 280 characters. It needs reputation tier 1, you
+  cannot repost your own article, and `remove_repost` undoes it. Confirm the
+  note with the user first.
 - `list_newsletter_issues` — feature it in the next issue rather than only
   posting socially.
 - `get_follow_status` when the user is considering outreach to another creator.

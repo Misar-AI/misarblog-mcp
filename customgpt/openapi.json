@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Misar.Blog Actions",
-    "description": "Publish and manage articles, series, comments, upvotes, saves, reposts, newsletters, and analytics — from any AI assistant.",
+    "description": "Publish and manage articles, series, upvotes, saved, reposts, reputation, newsletters and analytics — from any AI assistant.",
     "version": "1.0.0"
   },
   "servers": [
